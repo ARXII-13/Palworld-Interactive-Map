@@ -1,0 +1,39 @@
+{
+    "name": "palmap-desktop",
+    "version": "1.0.0",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron .",
+        "build": "electron-builder"
+    },
+    "devDependencies": {
+        "electron": "^33.0.0",
+        "electron-builder": "^24.13.3"
+    },
+    "dependencies": {
+        "express": "^4.21.2",
+        "open": "^7.4.2"
+    },
+    "build": {
+        "appId": "com.palmap.desktop",
+        "productName": "Palworld Interactive Map",
+        "directories": {
+            "output": "../dist"
+        },
+        "files": [
+            "**/*",
+            "../backend/build/**/*",
+            "../frontend/build/**/*"
+        ],
+        "extraResources": [
+            {
+                "from": "../frontend/build",
+                "to": "build/frontend"
+            }
+        ],
+        "win": {
+            "target": "nsis",
+            "icon": "icon.ico"
+        }
+    }
+}

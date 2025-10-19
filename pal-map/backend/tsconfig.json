@@ -5,7 +5,7 @@
         "moduleResolution": "NodeNext",
         "esModuleInterop": true,
         "strict": true,
-        "outDir": "../build/backend"
+        "outDir": "build"
     },
     "include": ["src/**/*"]
 }

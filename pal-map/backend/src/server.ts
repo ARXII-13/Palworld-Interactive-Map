@@ -1,27 +1,22 @@
-// backend/src/server.ts
-import express from "express";
 import path from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import express from "express";
+import openApp from "open";
 
 const app = express();
 const PORT = 3000;
 
-// Serve the frontend build
-const isPkg = typeof (process as any).pkg !== "undefined";
-const frontendPath = isPkg
-    ? path.join(path.dirname(process.execPath), "frontend") // for pkg, copy build folder next to exe
-    : path.join(__dirname, "../../build/frontend");
+const frontendPath = path.join(__dirname, "../../frontend/build");
 
-console.log(`Serving frontend files from: ${frontendPath}`);
+// Serve static files
 app.use(express.static(frontendPath));
 
-app.get("*", (_req, res) => {
+// Catch-all route
+app.get("*", (_req: any, res: any) => {
     res.sendFile(path.join(frontendPath, "index.html"));
 });
 
-app.listen(PORT, () => {
-    console.log(`✅ Palworld Map running at http://localhost:${PORT}`);
+// Start server
+app.listen(PORT, async () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+    console.log("Serving frontend from:", frontendPath);
 });
