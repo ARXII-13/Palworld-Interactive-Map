@@ -4,6 +4,7 @@ const { fork } = require("child_process");
 
 let mainWindow;
 let backendProcess;
+const isDev = !app.isPackaged;
 
 function createWindow() {
     mainWindow = new BrowserWindow({
@@ -29,7 +30,9 @@ function createWindow() {
 
 app.on("ready", () => {
     // ✅ Run your backend server directly
-    const serverPath = path.join(__dirname, "../backend/build/server.js");
+    const serverPath = isDev
+        ? path.join(__dirname, "../backend/build/server.js")
+        : path.join(process.resourcesPath, "backend", "build", "server.js");
     backendProcess = fork(serverPath, [], {
         cwd: path.dirname(serverPath),
         stdio: "inherit",

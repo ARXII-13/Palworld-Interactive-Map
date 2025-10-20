@@ -1,0 +1,26 @@
+appId: com.palmap.desktop
+productName: "Palworld Interactive Map"
+directories:
+    output: /dist
+    buildResources: assets
+files:
+    - "build/**/*"
+    - "../backend/build/**/*"
+    - "../backend/node_modules/**/*"
+    - "../frontend/build/**/*"
+    - "../frontend/node_modules/**/*"
+    - "!node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}"
+    - "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}"
+win:
+    target:
+        - portable
+    icon: "assets/icon.ico"
+extraResources:
+    - from: "../frontend/build"
+      to: "frontend/build"
+    - from: "../frontend/node_modules"
+      to: "frontend/node_modules"
+    - from: "../backend/build"
+      to: "backend/build"
+    - from: "../backend/node_modules"
+      to: "backend/node_modules"

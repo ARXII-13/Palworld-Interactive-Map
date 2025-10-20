@@ -2,6 +2,8 @@
     "name": "palmap-desktop",
     "version": "1.0.0",
     "main": "main.js",
+    "description": "Palworld Interactive Map Desktop",
+    "author": "ARX II-13",
     "scripts": {
         "start": "electron .",
         "build": "electron-builder"
@@ -23,16 +25,30 @@
         "files": [
             "**/*",
             "../backend/build/**/*",
-            "../frontend/build/**/*"
+            "../backend/node_modules/**/*",
+            "../frontend/build/**/*",
+            "../frontend/node_modules/**/*"
         ],
         "extraResources": [
             {
                 "from": "../frontend/build",
-                "to": "build/frontend"
+                "to": "frontend/build"
+            },
+            {
+                "from": "../frontend/node_modules",
+                "to": "frontend/node_modules"
+            },
+            {
+                "from": "../backend/build",
+                "to": "backend/build"
+            },
+            {
+                "from": "../backend/node_modules",
+                "to": "backend/node_modules"
             }
         ],
         "win": {
-            "target": "nsis",
+            "target": "portable",
             "icon": "icon.ico"
         }
     }
