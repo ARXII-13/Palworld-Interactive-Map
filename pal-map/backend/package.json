@@ -2,11 +2,18 @@
     "name": "backend",
     "version": "1.0.0",
     "main": "./build/server.js",
+    "type": "module",
     "scripts": {
-        "build": "tsc",
-        "dev": "ts-node-dev --respawn --transpile-only src/server.ts"
+        "prebuild": "eslint . --ext .ts",
+        "build": "tsc && npm run copy-assets",
+        "copy-assets": "npx copyfiles -u 2 src/assets/**/* build/assets",
+        "dev": "nodemon --exec node --loader ts-node/esm src/server.ts",
+        "lint": "eslint . --ext .ts",
+        "lint:fix": "eslint . --ext .ts --fix"
     },
     "dependencies": {
+        "cors": "^2.8.5",
+        "create-require": "^1.1.1",
         "express": "^4.21.2",
         "open": "^7.4.2",
         "winston": "^3.18.3"
@@ -15,8 +22,14 @@
         "@types/cors": "^2.8.19",
         "@types/express": "^4.17.21",
         "@types/node": "^20.12.7",
+        "@typescript-eslint/eslint-plugin": "^8.46.2",
+        "@typescript-eslint/parser": "^8.46.2",
+        "eslint": "^9.38.0",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-prettier": "^5.5.4",
+        "nodemon": "^3.1.10",
+        "prettier": "^3.6.2",
         "ts-node": "^10.9.2",
-        "ts-node-dev": "^2.0.0",
         "typescript": "^5.4.0"
     }
 }

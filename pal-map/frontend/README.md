@@ -1,5 +1,16 @@
-# Vue 3 + TypeScript + Vite
+# Palworld-Interactive-Map - Backend
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Development
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+`npm run dev`
+
+## Release build
+
+`npm run build`
+
+## Games Assets
+
+The assets are unpacked from the Palworld game files:
+
+- WorldMap `Pal/Content/Pal/Texture/UI/Map/T_WorldMap`
+- Fast Travel Icon `Pal/Content/Pal/Texture/UI/InGame/T_icon_compass_FTtower`

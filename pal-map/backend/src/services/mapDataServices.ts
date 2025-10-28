@@ -1,5 +1,6 @@
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
 import fs from "fs";
-import path from "path";
 
 export interface MapPoint {
     id: string;
@@ -16,7 +17,10 @@ export interface MapObjectLocation {
     z: number;
 }
 
-const DATA_DIR = path.join((process as any).resourcesPath || process.cwd(), "data");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const DATA_DIR = join(__dirname, "../assets");
 
 /**
  * Reads and parses JSON safely.
@@ -46,7 +50,7 @@ function convertToLatLng(x: number, y: number, z: number): MapObjectLocation {
  * Load and normalize all map data.
  */
 export async function getMapData(): Promise<MapPoint[]> {
-    const staticFile = path.join(DATA_DIR, "mapObjects.json");
+    const staticFile = join(DATA_DIR, "mapObjects.json");
     const staticData = readJsonFile<any[]>(staticFile) || [];
 
     const points: MapPoint[] = staticData.map((obj) => ({

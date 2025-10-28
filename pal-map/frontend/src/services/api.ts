@@ -1,5 +1,5 @@
 import axios, { HttpStatusCode, type AxiosInstance } from "axios";
-import type { MapMarker } from "../type/map";
+import type { MapMarker } from "@/types/map";
 
 const api: AxiosInstance = axios.create({
     baseURL: "http://localhost:3000/api",
@@ -13,7 +13,6 @@ interface MapResponse {
 
 export async function getMapData(): Promise<MapMarker[]> {
     const res = await api.get<MapResponse>("/map-data");
-    console.log(res);
     if (res.status !== HttpStatusCode.Ok) throw new Error("Failed to load map data");
     return res.data.data;
 }

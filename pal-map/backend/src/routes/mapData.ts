@@ -1,5 +1,5 @@
 import express from "express";
-import { getMapData } from "../services/mapDataServices";
+import { getMapData } from "../services/mapDataServices.js";
 
 const router = express.Router();
 

@@ -7,5 +7,5 @@
         "strict": true,
         "outDir": "build"
     },
-    "include": ["src/**/*"]
+    "include": ["src/**/*", "assets/**/*"]
 }
