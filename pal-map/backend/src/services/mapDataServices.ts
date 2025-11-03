@@ -40,8 +40,8 @@ function readJsonFile<T>(filePath: string): T | null {
  */
 function convertToLatLng(x: number, y: number, z: number): MapObjectLocation {
     return {
-        x: y / 1000, // example scale
-        y: x / 1000,
+        x: x,
+        y: y,
         z: z,
     };
 }

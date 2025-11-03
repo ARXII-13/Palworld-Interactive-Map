@@ -1,5 +1,5 @@
 <template>
-    <div class="h-screen w-screen">
+    <div>
         <MapView :markers="markers" />
     </div>
 </template>
