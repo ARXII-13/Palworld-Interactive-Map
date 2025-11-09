@@ -10,9 +10,9 @@
         }
     },
     {
-        "id": "FTPoint2",
-        "label": "en Text",
-        "type": "fastTravelPoint",
+        "id": "ElectricBoss",
+        "label": "Tower of the Brothers of the Eternal Pyre",
+        "type": "towerTravelPoint",
         "location": {
             "X": -361899.3,
             "Y": -112096.125,
@@ -90,9 +90,9 @@
         }
     },
     {
-        "id": "FTPoint10",
-        "label": "en Text",
-        "type": "fastTravelPoint",
+        "id": "DesertBoss",
+        "label": "Tower of the PIDF",
+        "type": "towerTravelPoint",
         "location": {
             "X": 29655.422,
             "Y": 413476.84,
@@ -180,9 +180,9 @@
         }
     },
     {
-        "id": "FTPoint19",
-        "label": "en Text",
-        "type": "fastTravelPoint",
+        "id": "SnowBoss",
+        "label": "Tower of the PAL Genetic Research Unit",
+        "type": "towerTravelPoint",
         "location": {
             "X": 81169.945,
             "Y": 90254.086,
@@ -240,9 +240,9 @@
         }
     },
     {
-        "id": "FTPoint66",
+        "id": "SakurajimaBoss",
         "label": "Moonflower Tower",
-        "type": "fastTravelPoint",
+        "type": "towerTravelPoint",
         "location": {
             "X": -29488.742,
             "Y": -116237.945,
@@ -350,9 +350,9 @@
         }
     },
     {
-        "id": "FTPoint77",
-        "label": "",
-        "type": "fastTravelPoint",
+        "id": "VikingBoss",
+        "label": "Feybreak Tower",
+        "type": "towerTravelPoint",
         "location": {
             "X": -889646.3,
             "Y": -435717.28,
@@ -610,9 +610,9 @@
         }
     },
     {
-        "id": "FTPoint46",
-        "label": "en Text",
-        "type": "fastTravelPoint",
+        "id": "GrassBoss",
+        "label": "Tower of the Rayne Syndicate",
+        "type": "towerTravelPoint",
         "location": {
             "X": -321844.94,
             "Y": 209097.66,
@@ -620,9 +620,9 @@
         }
     },
     {
-        "id": "FTPoint47",
-        "label": "en Text",
-        "type": "fastTravelPoint",
+        "id": "ForestBoss",
+        "label": "Tower of the Free Pal Alliance",
+        "type": "towerTravelPoint",
         "location": {
             "X": -110130.67,
             "Y": 241503.55,

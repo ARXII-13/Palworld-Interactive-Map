@@ -1,11 +1,25 @@
 <template>
-    <div id="map" class="w-full h-full"></div>
+    <div class="relative w-full h-full">
+        <div id="map" class="w-full h-full"></div>
+
+        <!-- Toggle Button -->
+        <button
+            class="map-toggle-button"
+            :style="{ right: showPanel ? '19rem' : '1rem' }"
+            @click="showPanel = !showPanel"
+        >
+            {{ showPanel ? "⮝ Hide Filters" : "⮞ Show Filters" }}
+        </button>
+
+        <MapFilterPanel :showPanel="showPanel" v-model="markerFilters" />
+    </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, watch, computed, ref, onUnmounted } from "vue";
 import L from "leaflet";
-import type { MapMarker } from "@/types/map";
+import type { MapMarker, MapMarkerType, MapMarkerTypeFilter } from "@/types/map";
+import MapFilterPanel from "@/components/map/panel/MapFilterPanel.vue";
 import {
     MAP_SIZE,
     mapToWorld,
@@ -21,10 +35,32 @@ import {
 } from "@/components/map/utils";
 import { mapImages, mapIcons } from "@/components/map/mapImages";
 import "leaflet/dist/leaflet.css";
+import "@/components/map/MapView.css";
 
 const props = defineProps<{
     markers: MapMarker[];
 }>();
+
+const showPanel = ref(false);
+const markerFilters = ref({
+    fastTravelPoint: {
+        icon: mapImages.fastTravelPointIcon,
+        label: "Fast Travel",
+        visible: true,
+        count: 0,
+    },
+    towerTravelPoint: {
+        icon: mapImages.towerTravelPointIcon,
+        label: "Tower",
+        visible: true,
+        count: 0,
+    },
+} as Record<MapMarkerType, MapMarkerTypeFilter>);
+
+const markerTypeToIcon: Record<MapMarkerType, L.Icon> = {
+    fastTravelPoint: mapIcons.fastTravel,
+    towerTravelPoint: mapIcons.towerTravel,
+};
 
 let map: L.Map;
 let markerLayer: L.LayerGroup;
@@ -63,6 +99,7 @@ onMounted(() => {
 
     markerLayer = L.layerGroup().addTo(map);
 
+    updateMarkersCount();
     addCoordinateDisplay();
     updateMarkers();
 });
@@ -73,20 +110,51 @@ onUnmounted(() => {
     }
 });
 
+function updateMarkersCount() {
+    const counts: Record<MapMarkerType, number> = {
+        fastTravelPoint: 0,
+        towerTravelPoint: 0,
+    };
+
+    props.markers.forEach((marker) => {
+        const markerType = marker.type;
+        if (counts[markerType] !== undefined) {
+            counts[markerType]++;
+        }
+    });
+
+    // Replace top-level object with new nested objects
+    markerFilters.value = {
+        fastTravelPoint: {
+            ...markerFilters.value.fastTravelPoint,
+            count: counts.fastTravelPoint,
+        },
+        towerTravelPoint: {
+            ...markerFilters.value.towerTravelPoint,
+            count: counts.towerTravelPoint,
+        },
+    };
+}
+
 function updateMarkers() {
     if (!markerLayer) return;
     markerLayer.clearLayers();
 
-    const icon = mapIcons.fastTravel;
-    props.markers.forEach((m) => {
+    const visibleMarkers = props.markers.filter(
+        (marker) => markerFilters.value[marker.type].visible
+    );
+
+    visibleMarkers.forEach((m) => {
         const mapCoords = worldToMap(m.position.x, m.position.y);
         const mapLatLng = worldToLeaflet(m.position.x, m.position.y);
 
         L.marker(mapLatLng, {
-            icon: icon,
+            icon: markerTypeToIcon[m.type],
         })
             .addTo(markerLayer)
-            .bindPopup(`<b>${m.name}</b><br>Map: ${mapCoords.x}, ${-mapCoords.y}`);
+            .bindPopup(
+                `<b>${m.name}</b><br>Map: ${mapCoords.x}, ${-mapCoords.y}<br>Game: ${m.position.x}, ${m.position.y}`
+            );
     });
 }
 
@@ -132,19 +200,7 @@ function addCoordinateDisplay() {
         }
     });
 }
-watch(
-    () => props.markers,
-    () => updateMarkers(),
-    { deep: true }
-);
+watch([() => props.markers, () => markerFilters.value], () => updateMarkers(), { deep: true });
 </script>
 
-<style scoped>
-#map {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-</style>
+<style></style>

@@ -25,6 +25,20 @@ export function loadJsonFiles(directory, language) {
             "DT_MapRespawnPointInfoText.json"
         ),
     };
+    filesToLoad["UICommonTextCommon"] = {
+        file: "DT_UICommonTextCommon.json",
+        type: "language",
+        path: path.join(
+            directory,
+            "Content",
+            "L10N",
+            language,
+            "Pal",
+            "DataTable",
+            "Text",
+            "DT_UI_Common_Text_Common.json"
+        ),
+    };
 
     const filesObject = {};
     Object.entries(filesToLoad).forEach(([key, { file, type, path }]) => {

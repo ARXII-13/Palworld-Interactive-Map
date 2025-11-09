@@ -1,10 +1,19 @@
+export type MapMarkerType = "fastTravelPoint" | "towerTravelPoint";
+
 export interface MapMarker {
     id: string;
     name: string;
-    type: string;
+    type: MapMarkerType;
     position: MapObjectLocation;
     discovered?: boolean;
     metadata?: Record<string, any>;
+}
+
+export interface MapMarkerTypeFilter {
+    icon: string;
+    label: string;
+    visible: true;
+    count: number;
 }
 
 export interface MapObjectLocation {
