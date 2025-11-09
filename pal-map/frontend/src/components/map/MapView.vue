@@ -115,7 +115,6 @@ function updateMarkersCount() {
         fastTravelPoint: 0,
         towerTravelPoint: 0,
     };
-
     props.markers.forEach((marker) => {
         const markerType = marker.type;
         if (counts[markerType] !== undefined) {
@@ -123,7 +122,6 @@ function updateMarkersCount() {
         }
     });
 
-    // Replace top-level object with new nested objects
     markerFilters.value = {
         fastTravelPoint: {
             ...markerFilters.value.fastTravelPoint,
@@ -200,7 +198,15 @@ function addCoordinateDisplay() {
         }
     });
 }
-watch([() => props.markers, () => markerFilters.value], () => updateMarkers(), { deep: true });
+
+watch(
+    () => props.markers,
+    () => {
+        updateMarkersCount();
+        updateMarkers();
+    },
+    { immediate: true }
+);
 </script>
 
 <style></style>
