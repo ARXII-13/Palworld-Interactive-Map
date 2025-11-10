@@ -34,16 +34,17 @@
 
 <script setup lang="ts">
 import { ref, watch, defineProps, defineEmits } from "vue";
-import type { MapMarkerTypeFilter } from "@/types/map";
+import type { MapMarkerType, MapMarkerTypeFilter } from "@/types/map";
 import "@/components/map/panel/MapFilterPanel.css";
 
 const props = defineProps<{
     showPanel: boolean;
-    modelValue: Record<string, MapMarkerTypeFilter>;
+    modelValue: Record<MapMarkerType, MapMarkerTypeFilter>;
 }>();
 
-const emit = defineEmits(["update:modelValue"]);
-
+const emit = defineEmits<{
+    (e: "filters-updated", newFilters: Record<MapMarkerType, MapMarkerTypeFilter>): void;
+}>();
 const filters = ref({ ...props.modelValue });
 
 watch(
@@ -55,22 +56,29 @@ watch(
 );
 
 function emitFilters() {
-    const updatedFilters: Record<string, MapMarkerTypeFilter> = {};
+    const updatedFilters: Partial<Record<MapMarkerType, MapMarkerTypeFilter>> = {};
     Object.entries(filters.value).forEach(([markerType, typeFilter]) => {
-        const originalFilter = props.modelValue[markerType];
-        updatedFilters[markerType] = {
+        const originalFilter = props.modelValue[markerType as MapMarkerType];
+        updatedFilters[markerType as MapMarkerType] = {
             ...originalFilter,
             visible: typeFilter.visible,
         } as MapMarkerTypeFilter;
     });
-    emit("update:modelValue", updatedFilters);
+    onFilterChange(updatedFilters as Record<MapMarkerType, MapMarkerTypeFilter>);
 }
 function setAll(value: boolean) {
-    const newFilters: Record<string, MapMarkerTypeFilter> = {};
+    const newFilters: Partial<Record<MapMarkerType, MapMarkerTypeFilter>> = {};
     Object.entries(filters.value).forEach(([markerType, typeFilter]) => {
-        newFilters[markerType] = { ...typeFilter, visible: value } as MapMarkerTypeFilter;
+        newFilters[markerType as MapMarkerType] = {
+            ...typeFilter,
+            visible: value,
+        } as MapMarkerTypeFilter;
     });
-    emit("update:modelValue", newFilters);
+    onFilterChange(newFilters as Record<MapMarkerType, MapMarkerTypeFilter>);
+}
+
+function onFilterChange(filters: Record<MapMarkerType, MapMarkerTypeFilter>) {
+    emit("filters-updated", filters);
 }
 </script>
 

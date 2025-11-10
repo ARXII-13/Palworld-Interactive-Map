@@ -10,7 +10,11 @@
             {{ showPanel ? "⮝ Hide Filters" : "⮞ Show Filters" }}
         </button>
 
-        <MapFilterPanel :showPanel="showPanel" v-model="markerFilters" />
+        <MapFilterPanel
+            :showPanel="showPanel"
+            v-model="markerFilters"
+            @filters-updated="onFiltersUpdated"
+        />
     </div>
 </template>
 
@@ -158,16 +162,16 @@ function updateMarkers() {
         const mapLatLng = worldToLeaflet(m.position.x, m.position.y);
 
         const popupHtml = `
-    <div class="marker-popup">
-      <b>${m.name}</b><br>
-      Map: ${Math.round(mapCoords.x)}, ${Math.round(-mapCoords.y)}<br>
-      Game: ${Math.round(m.position.x)}, ${Math.round(m.position.y)}<br>
-      <label style="display:flex;align-items:center;gap:5px;margin-top:6px;">
-        <input type="checkbox" id="chk-${m.id}" ${m.discovered ? "checked" : ""} />
-        <span>Discovered</span>
-      </label>
-    </div>
-  `;
+  <div class="custom-popup-content">
+    <b>${m.name}</b>
+    <div>Map: ${Math.round(mapCoords.x)}, ${Math.round(-mapCoords.y)}</div>
+    <div>Game: ${Math.round(m.position.x)}, ${Math.round(m.position.y)}</div>
+    <label>
+      <input type="checkbox" id="chk-${m.id}" ${m.discovered ? "checked" : ""} />
+      <span>Discovered</span>
+    </label>
+  </div>
+`;
 
         const icon = markerTypeToIcon[m.discovered ? `${m.type}Checked` : m.type]; // Example of different
         const marker = L.marker(mapLatLng, {
@@ -252,13 +256,19 @@ function toggleMarkerProgress(markerType: MapMarkerType, markerId: string) {
     }
 }
 
+function onFiltersUpdated(newFilters: typeof markerFilters.value) {
+    markerFilters.value = { ...newFilters };
+    updateMarkersCount();
+    updateMarkers();
+}
+
 watch(
     () => props.markers,
     () => {
         updateMarkersCount();
         updateMarkers();
     },
-    { immediate: true }
+    { deep: true, immediate: true }
 );
 </script>
 

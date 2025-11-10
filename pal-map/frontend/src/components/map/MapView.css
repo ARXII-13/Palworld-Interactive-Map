@@ -49,8 +49,6 @@
     pointer-events: none;
     transform: scale(1.25);
 }
-
-/* keep checkmark absolutely positioned and not affecting layout */
 .marker-checkbox,
 .marker-checkmark {
     position: absolute;
@@ -93,4 +91,28 @@
     width: 9px;
     height: 9px;
     fill: white;
+}
+
+.custom-popup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.custom-popup-content b {
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+.custom-popup-content div {
+    font-size: 0.875rem;
+}
+
+.custom-popup-content label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 6px;
+    justify-content: center;
 }
