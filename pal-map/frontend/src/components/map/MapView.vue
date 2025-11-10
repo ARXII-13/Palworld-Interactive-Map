@@ -2,7 +2,6 @@
     <div class="relative w-full h-full">
         <div id="map" class="w-full h-full"></div>
 
-        <!-- Toggle Button -->
         <button
             class="map-toggle-button"
             :style="{ right: showPanel ? '19rem' : '1rem' }"
@@ -47,19 +46,21 @@ const markerFilters = ref({
         icon: mapImages.fastTravelPointIcon,
         label: "Fast Travel",
         visible: true,
-        count: 0,
+        totalCount: 0,
     },
     towerTravelPoint: {
         icon: mapImages.towerTravelPointIcon,
         label: "Tower",
         visible: true,
-        count: 0,
+        totalCount: 0,
     },
 } as Record<MapMarkerType, MapMarkerTypeFilter>);
 
-const markerTypeToIcon: Record<MapMarkerType, L.Icon> = {
+const markerTypeToIcon: Record<string, L.Icon | L.DivIcon> = {
     fastTravelPoint: mapIcons.fastTravel,
+    fastTravelPointChecked: mapIcons.fastTravelChecked,
     towerTravelPoint: mapIcons.towerTravel,
+    towerTravelPointChecked: mapIcons.towerTravelChecked,
 };
 
 let map: L.Map;
@@ -111,25 +112,35 @@ onUnmounted(() => {
 });
 
 function updateMarkersCount() {
-    const counts: Record<MapMarkerType, number> = {
+    const totalCounts: Record<MapMarkerType, number> = {
+        fastTravelPoint: 0,
+        towerTravelPoint: 0,
+    };
+    const discoveredCounts: Record<MapMarkerType, number> = {
         fastTravelPoint: 0,
         towerTravelPoint: 0,
     };
     props.markers.forEach((marker) => {
         const markerType = marker.type;
-        if (counts[markerType] !== undefined) {
-            counts[markerType]++;
+        if (totalCounts[markerType] !== undefined) {
+            totalCounts[markerType]++;
+
+            if (marker.discovered) {
+                discoveredCounts[markerType]++;
+            }
         }
     });
 
     markerFilters.value = {
         fastTravelPoint: {
             ...markerFilters.value.fastTravelPoint,
-            count: counts.fastTravelPoint,
+            totalCount: totalCounts.fastTravelPoint,
+            discoveredCount: discoveredCounts.fastTravelPoint,
         },
         towerTravelPoint: {
             ...markerFilters.value.towerTravelPoint,
-            count: counts.towerTravelPoint,
+            totalCount: totalCounts.towerTravelPoint,
+            discoveredCount: discoveredCounts.towerTravelPoint,
         },
     };
 }
@@ -146,13 +157,42 @@ function updateMarkers() {
         const mapCoords = worldToMap(m.position.x, m.position.y);
         const mapLatLng = worldToLeaflet(m.position.x, m.position.y);
 
-        L.marker(mapLatLng, {
-            icon: markerTypeToIcon[m.type],
+        const popupHtml = `
+    <div class="marker-popup">
+      <b>${m.name}</b><br>
+      Map: ${Math.round(mapCoords.x)}, ${Math.round(-mapCoords.y)}<br>
+      Game: ${Math.round(m.position.x)}, ${Math.round(m.position.y)}<br>
+      <label style="display:flex;align-items:center;gap:5px;margin-top:6px;">
+        <input type="checkbox" id="chk-${m.id}" ${m.discovered ? "checked" : ""} />
+        <span>Discovered</span>
+      </label>
+    </div>
+  `;
+
+        const icon = markerTypeToIcon[m.discovered ? `${m.type}Checked` : m.type]; // Example of different
+        const marker = L.marker(mapLatLng, {
+            icon,
         })
             .addTo(markerLayer)
-            .bindPopup(
-                `<b>${m.name}</b><br>Map: ${mapCoords.x}, ${-mapCoords.y}<br>Game: ${m.position.x}, ${m.position.y}`
-            );
+            .bindPopup(popupHtml);
+
+        marker.on("popupopen", () => {
+            const checkbox = document.getElementById(`chk-${m.id}`) as HTMLInputElement;
+            if (checkbox) {
+                checkbox.checked = m.discovered;
+                checkbox.addEventListener("change", () => {
+                    toggleMarkerProgress(m.type, m.id);
+
+                    const updated = props.markers.find((x) => x.id === m.id);
+                    if (updated) {
+                        const icon = markerTypeToIcon[m.discovered ? `${m.type}Checked` : m.type];
+                        if (icon) {
+                            marker.setIcon(icon);
+                        }
+                    }
+                });
+            }
+        });
     });
 }
 
@@ -197,6 +237,19 @@ function addCoordinateDisplay() {
             display.innerHTML = innerHTML;
         }
     });
+}
+
+function toggleMarkerProgress(markerType: MapMarkerType, markerId: string) {
+    const marker = props.markers.find((m) => m.id === markerId);
+    if (marker) {
+        const isDiscovered = marker.discovered === true;
+        if (isDiscovered) {
+            markerFilters.value[markerType].discoveredCount--;
+        } else {
+            markerFilters.value[markerType].discoveredCount++;
+        }
+        marker.discovered = !isDiscovered;
+    }
 }
 
 watch(

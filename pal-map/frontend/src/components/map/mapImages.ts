@@ -1,5 +1,5 @@
 import { assetLoader } from "@/utils/assetLoader";
-import { icon } from "leaflet";
+import { divIcon, icon } from "leaflet";
 
 const MAP_ASSET_PATH = "../assets/map";
 
@@ -22,16 +22,50 @@ export const mapImages = {
 };
 
 export const mapIcons = {
-    fastTravel: icon({
-        iconUrl: mapImages.fastTravelPointIcon,
-        iconSize: [48, 48],
-        iconAnchor: [24, 24],
-        popupAnchor: [0, -16],
+    fastTravel: divIcon({
+        html: `
+      <div class="marker-wrapper">
+        <img src="${mapImages.fastTravelPointIcon}" class="marker-base" />
+      </div>
+    `,
+        className: "custom-marker",
+        iconSize: [32, 32],
+        iconAnchor: [16 * 1.25, 16 * 1.25],
+        popupAnchor: [-4, -12],
     }),
-    towerTravel: icon({
-        iconUrl: mapImages.towerTravelPointIcon,
-        iconSize: [48, 48],
-        iconAnchor: [24, 24],
-        popupAnchor: [0, -16],
+    fastTravelChecked: divIcon({
+        html: `
+      <div class="marker-wrapper">
+        <img src="${mapImages.fastTravelPointIcon}" class="marker-base" />
+        <div class="marker-checkbox"></div>
+      </div>
+    `,
+        className: "custom-marker",
+        iconSize: [32, 32],
+        iconAnchor: [16 * 1.25, 16 * 1.25],
+        popupAnchor: [-4, -12],
+    }),
+    towerTravel: divIcon({
+        html: `
+      <div class="marker-wrapper">
+        <img src="${mapImages.towerTravelPointIcon}" class="marker-base" />
+      </div>
+    `,
+        className: "custom-marker",
+        iconSize: [32, 32],
+        iconAnchor: [16 * 1.25, 16 * 1.25],
+        popupAnchor: [-4, -16],
+    }),
+    towerTravelChecked: divIcon({
+        html: `
+      <div class="marker-wrapper">  
+        <img src="${mapImages.towerTravelPointIcon}" class="marker-base" />
+        <div class="marker-checkbox"></div>
+      </div>
+    `,
+        className: "custom-marker",
+        iconSize: [32, 32],
+        iconAnchor: [16 * 1.25, 16 * 1.25],
+        popupAnchor: [-4, -16],
     }),
 };

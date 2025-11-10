@@ -15,7 +15,7 @@
                             <span>{{ value.label }}</span>
                         </span>
                         <span class="text-gray-500">
-                            {{ value.count }}
+                            {{ value.discoveredCount }}/{{ value.totalCount }}
                         </span>
                     </div>
                 </label>

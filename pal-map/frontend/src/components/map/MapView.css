@@ -34,3 +34,63 @@
 .map-toggle-button:active {
     transform: scale(0.97);
 }
+
+.marker-wrapper {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+}
+
+.marker-base {
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: none;
+    transform: scale(1.25);
+}
+
+/* keep checkmark absolutely positioned and not affecting layout */
+.marker-checkbox,
+.marker-checkmark {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+    z-index: 10; /* ensure it stays on top */
+}
+
+/* version with ✓ character */
+.marker-checkbox {
+    background: #22c55e;
+}
+.marker-checkbox::after {
+    content: "✓";
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    line-height: 1;
+}
+.marker-checkbox.unchecked {
+    background: #aaa;
+}
+.marker-checkbox.unchecked::after {
+    content: "";
+}
+
+/* version with SVG */
+.marker-checkmark {
+    background: #22c55e;
+}
+.marker-checkmark svg {
+    width: 9px;
+    height: 9px;
+    fill: white;
+}
