@@ -4,31 +4,30 @@
     left: 0;
     width: 100%;
     height: 100%;
+    background-color: #1a1a1a;
 }
 
-/* Toggle button overlay */
 .map-toggle-button {
     position: absolute;
-    top: 1rem; /* space from top */
-    right: 1rem; /* space from right */
-    z-index: 1200; /* must be higher than Leaflet layers */
-    background: white;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1200;
+    background: #1f2937;
     border: none;
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
     font-size: 0.875rem;
     font-weight: 500;
-    color: #333;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    color: #f3f4f6;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
     cursor: pointer;
     transition:
         background 0.2s ease,
         transform 0.1s ease;
 }
 
-/* Button hover / active effects */
 .map-toggle-button:hover {
-    background: #f4f4f4;
+    background: #374151;
 }
 
 .map-toggle-button:active {
@@ -49,6 +48,7 @@
     pointer-events: none;
     transform: scale(1.25);
 }
+
 .marker-checkbox,
 .marker-checkmark {
     position: absolute;
@@ -60,12 +60,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
     pointer-events: none;
-    z-index: 10; /* ensure it stays on top */
+    z-index: 10;
 }
 
-/* version with ✓ character */
 .marker-checkbox {
     background: #22c55e;
 }
@@ -77,13 +76,12 @@
     line-height: 1;
 }
 .marker-checkbox.unchecked {
-    background: #aaa;
+    background: #6b7280;
 }
 .marker-checkbox.unchecked::after {
     content: "";
 }
 
-/* version with SVG */
 .marker-checkmark {
     background: #22c55e;
 }
@@ -93,11 +91,31 @@
     fill: white;
 }
 
+.leaflet-popup-content-wrapper {
+    background-color: #1e1e1e; /* dark background */
+    color: #f3f4f6; /* light text */
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.leaflet-popup-tip {
+    background: #1e1e1e;
+}
+
+.leaflet-popup-content a {
+    color: #5ea3ff;
+}
+
+.leaflet-popup-content a:hover {
+    color: #7aaeff;
+}
+
 .custom-popup-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    color: #f3f4f6;
 }
 
 .custom-popup-content b {

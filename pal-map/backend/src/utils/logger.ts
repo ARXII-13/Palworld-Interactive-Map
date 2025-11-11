@@ -39,8 +39,8 @@ const logger = createLogger({
 
 // Graceful helper wrappers
 export const log = {
-    info: (msg: string) => logger.info(msg),
-    warn: (msg: string) => logger.warn(msg),
+    info: (msg: string, ...meta: any[]) => logger.info(msg, ...meta),
+    warn: (msg: string, ...meta: any[]) => logger.warn(msg, ...meta),
     error: (msg: string, err?: unknown) => {
         if (err instanceof Error) {
             logger.error(`${msg}: ${err.message}\n${err.stack}`);
@@ -50,7 +50,7 @@ export const log = {
             logger.error(msg);
         }
     },
-    debug: (msg: string) => logger.debug(msg),
+    debug: (msg: string, ...meta: any[]) => logger.debug(msg, ...meta),
     stream: logger.stream,
 };
 

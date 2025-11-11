@@ -1,5 +1,5 @@
 import { assetLoader } from "@/utils/assetLoader";
-import { divIcon, icon } from "leaflet";
+import { divIcon } from "leaflet";
 
 const MAP_ASSET_PATH = "../assets/map";
 

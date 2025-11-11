@@ -1,6 +1,7 @@
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 import fs from "fs";
+import logger from "../utils/logger.js";
 
 export interface MapPoint {
     id: string;
@@ -30,7 +31,7 @@ function readJsonFile<T>(filePath: string): T | null {
         const raw = fs.readFileSync(filePath, "utf8");
         return JSON.parse(raw);
     } catch (err) {
-        console.warn(`[MapData] Failed to read: ${filePath}`, err);
+        logger.warn(`[MapData] Failed to read: ${filePath}: ${err}`);
         return null;
     }
 }

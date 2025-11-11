@@ -14,7 +14,8 @@
         "axios": "^1.12.2",
         "leaflet": "^1.9.4",
         "vue": "^3.5.22",
-        "vue-leaflet": "^0.1.0"
+        "vue-leaflet": "^0.1.0",
+        "vue-toastification": "^2.0.0-rc.5"
     },
     "devDependencies": {
         "@eslint/js": "^9.36.0",

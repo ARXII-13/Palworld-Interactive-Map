@@ -1,18 +1,54 @@
-import axios, { HttpStatusCode, type AxiosInstance } from "axios";
-import type { MapMarker } from "@/types/map";
+import axios, { type AxiosInstance } from "axios";
+import { useToast } from "vue-toastification";
 
 const api: AxiosInstance = axios.create({
     baseURL: "http://localhost:3000/api",
     timeout: 5000,
 });
 
-interface MapResponse {
+api.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        const toast = useToast();
+
+        // Handle known HTTP error statuses
+        if (error.response) {
+            const status = error.response.status;
+            switch (status) {
+                case 400:
+                    toast.error("Bad request. Please check your input.");
+                    break;
+                case 401:
+                    toast.error("Unauthorized. Please log in again.");
+                    break;
+                case 403:
+                    toast.error("You don’t have permission to perform this action.");
+                    break;
+                case 404:
+                    toast.error("Resource not found.");
+                    break;
+                case 500:
+                    toast.error("Server error. Please try again later.");
+                    break;
+                default:
+                    toast.error(`Unexpected error (${status}).`);
+            }
+        } else if (error.request) {
+            // No response from server (network or timeout)
+            toast.error("Network error or server not responding.");
+        } else {
+            // Error before request was sent
+            toast.error("Unexpected error occurred.");
+        }
+
+        // Always reject so local `try/catch` can still handle it
+        return Promise.reject(error);
+    }
+);
+
+export interface GenernicApiResponse<T> {
     success: boolean;
-    data: MapMarker[];
+    data: T;
 }
 
-export async function getMapData(): Promise<MapMarker[]> {
-    const res = await api.get<MapResponse>("/map-data");
-    if (res.status !== HttpStatusCode.Ok) throw new Error("Failed to load map data");
-    return res.data.data;
-}
+export default api;

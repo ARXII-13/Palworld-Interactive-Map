@@ -2,20 +2,22 @@
     position: absolute;
     top: 0;
     right: 0;
-    height: 100%; /* same as parent container */
+    height: 100%;
     width: 18rem;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(18, 18, 18, 0.95);
     backdrop-filter: blur(8px);
-    border-left: 1px solid #e5e7eb;
-    box-shadow: -2px 0 6px rgba(0, 0, 0, 0.1);
+    border-left: 1px solid #374151;
+    box-shadow: -2px 0 6px rgba(0, 0, 0, 0.5);
     z-index: 1200;
-    overflow-y: hidden; /* disable vertical scroll */
+    overflow-y: hidden;
     padding: 1rem;
     box-sizing: border-box;
+    color: #f3f4f6;
 }
 
 .map-filter-panel h3 {
     margin-bottom: 0.75rem;
+    color: #f3f4f6;
 }
 
 .map-filter-panel .filters-container {
@@ -26,15 +28,14 @@
 
 .map-marker-label > div {
     display: flex;
-    align-items: center; /* vertical center everything */
+    align-items: center;
     gap: 0.5rem;
     width: 100%;
 }
 
 .map-marker-label input[type="checkbox"] {
-    /* vertically center the checkbox relative to the text/icon */
     margin: 0;
-    transform: translateY(1px); /* fine-tune alignment */
+    transform: translateY(1px);
     flex-shrink: 0;
 }
 
@@ -47,13 +48,14 @@
 
 .map-marker-label span {
     display: flex;
-    align-items: center; /* ensures icon + text are centered together */
+    align-items: center;
     gap: 0.5rem;
+    color: #f3f4f6;
 }
 
 .map-marker-label span.text-gray-500 {
-    margin-left: auto; /* push count to the right */
+    margin-left: auto;
     font-size: 0.75rem;
     font-weight: 500;
-    color: #6b7280; /* gray-500 */
+    color: #9ca3af;
 }

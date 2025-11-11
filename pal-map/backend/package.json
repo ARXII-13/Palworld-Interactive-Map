@@ -5,13 +5,16 @@
     "type": "module",
     "scripts": {
         "prebuild": "eslint . --ext .ts",
-        "build": "tsc && npm run copy-assets",
+        "build": "tsc && npm run copy-assets && npm run rebuild:electron",
         "copy-assets": "npx copyfiles -u 2 src/assets/**/* build/assets",
-        "dev": "nodemon --exec node --loader ts-node/esm src/server.ts",
+        "rebuild:electron": "electron-rebuild -f -w better-sqlite3 --version 33.4.11",
+        "dev": "npm run rebuild && nodemon --exec node --loader ts-node/esm src/server.ts",
+        "rebuild": "npm rebuild better-sqlite3",
         "lint": "eslint . --ext .ts",
         "lint:fix": "eslint . --ext .ts --fix"
     },
     "dependencies": {
+        "better-sqlite3": "^12.4.1",
         "cors": "^2.8.5",
         "create-require": "^1.1.1",
         "express": "^4.21.2",
@@ -19,6 +22,8 @@
         "winston": "^3.18.3"
     },
     "devDependencies": {
+        "@electron/rebuild": "^4.0.1",
+        "@types/better-sqlite3": "^7.6.13",
         "@types/cors": "^2.8.19",
         "@types/express": "^4.17.21",
         "@types/node": "^20.12.7",

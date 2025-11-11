@@ -5,7 +5,9 @@
         "moduleResolution": "NodeNext",
         "esModuleInterop": true,
         "strict": true,
-        "outDir": "build"
+        "outDir": "build",
+        "types": ["node", "express"],
+        "typeRoots": ["./node_modules/@types", "./src/types"]
     },
     "include": ["src/**/*", "assets/**/*"]
 }

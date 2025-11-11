@@ -22,3 +22,9 @@ export interface MapObjectLocation {
     y: number;
     z: number;
 }
+
+export interface MarkerProgress {
+    id: string;
+    markerType: string;
+    name: string;
+}

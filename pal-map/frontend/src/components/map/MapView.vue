@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import { onMounted, watch, computed, ref, onUnmounted } from "vue";
 import L from "leaflet";
-import type { MapMarker, MapMarkerType, MapMarkerTypeFilter } from "@/types/map";
+import type { MapMarker, MapMarkerType, MapMarkerTypeFilter, MarkerProgress } from "@/types/map";
 import MapFilterPanel from "@/components/map/panel/MapFilterPanel.vue";
 import {
     MAP_SIZE,
@@ -39,6 +39,8 @@ import {
 import { mapImages, mapIcons } from "@/components/map/mapImages";
 import "leaflet/dist/leaflet.css";
 import "@/components/map/MapView.css";
+import { addMarkerDiscoveryStatus, deleteMarkerDiscoveryStatus } from "@/services/marker";
+import { useToast } from "vue-toastification";
 
 const props = defineProps<{
     markers: MapMarker[];
@@ -247,12 +249,24 @@ function toggleMarkerProgress(markerType: MapMarkerType, markerId: string) {
     const marker = props.markers.find((m) => m.id === markerId);
     if (marker) {
         const isDiscovered = marker.discovered === true;
-        if (isDiscovered) {
-            markerFilters.value[markerType].discoveredCount--;
-        } else {
-            markerFilters.value[markerType].discoveredCount++;
+        try {
+            if (isDiscovered) {
+                deleteMarkerDiscoveryStatus(markerId);
+                markerFilters.value[markerType].discoveredCount--;
+            } else {
+                const data: MarkerProgress = {
+                    id: markerId,
+                    markerType,
+                    name: marker.name,
+                };
+                addMarkerDiscoveryStatus(data);
+                markerFilters.value[markerType].discoveredCount++;
+            }
+            marker.discovered = !isDiscovered;
+        } catch (error) {
+            useToast().error("Error updating marker discovery status.");
+            return;
         }
-        marker.discovered = !isDiscovered;
     }
 }
 

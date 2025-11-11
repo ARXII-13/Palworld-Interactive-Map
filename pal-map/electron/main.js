@@ -33,11 +33,19 @@ app.on("ready", () => {
     const serverPath = isDev
         ? path.join(__dirname, "../backend/build/server.js")
         : path.join(process.resourcesPath, "backend", "build", "server.js");
+
+    const userDataPath = path.join(process.env.APPDATA || ".", "palmap-desktop");
+    console.log("📦 Backend path:", serverPath);
+    console.log("💾 Persistent data dir:", userDataPath);
+
     backendProcess = fork(serverPath, [], {
         cwd: path.dirname(serverPath),
+        env: {
+            ...process.env,
+            ELECTRON_APP_DATA: userDataPath,
+        },
         stdio: "inherit",
     });
-
     createWindow();
 });
 

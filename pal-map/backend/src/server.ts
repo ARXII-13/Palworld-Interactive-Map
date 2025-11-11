@@ -1,19 +1,13 @@
-import { fileURLToPath } from "url";
-import { dirname, join } from "path";
 import express from "express";
-import mapRouter from "./routes/mapData.js";
 import cors from "cors";
+import mapRouter from "./routes/mapData.js";
+import markerRouter from "./routes/markerData.js";
 import logger from "./utils/logger.js";
+import { frontendPath, indexHtmlPath } from "./path.js";
 
 const app = express();
 const PORT = 3000;
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const frontendPath = join(__dirname, "../../frontend/build");
-
-// Serve static files
 app.use(express.static(frontendPath));
 app.use(
     cors({
@@ -25,15 +19,41 @@ app.use(
 
 app.use(cors());
 app.use(express.json());
-app.use("/api/map-data", mapRouter);
+
+app.use((req, res, next) => {
+    const start = Date.now();
+
+    // Log request details
+    logger.info(`➡️  [${req.method}] ${req.originalUrl}`);
+
+    // Capture response finish event
+    res.on("finish", () => {
+        const duration = Date.now() - start;
+        const statusColor =
+            res.statusCode >= 500
+                ? "\x1b[31m" // red
+                : res.statusCode >= 400
+                  ? "\x1b[33m" // yellow
+                  : "\x1b[32m"; // green
+
+        logger.info(
+            `⬅️  [${req.method}] ${req.originalUrl} ${statusColor}${res.statusCode}\x1b[0m - ${duration}ms`
+        );
+    });
+
+    next();
+});
+
+app.use("/api/map", mapRouter);
+app.use("/api/marker", markerRouter);
 
 // Catch-all route
 app.get("*", (_req: any, res: any) => {
-    res.sendFile(join(frontendPath, "index.html"));
+    res.sendFile(indexHtmlPath);
 });
 
 // Start server
 app.listen(PORT, async () => {
     logger.info(`Server running at http://localhost:${PORT}`);
-    logger.info("Serving frontend from:", frontendPath);
+    logger.info(`Serving frontend from: ${frontendPath}`);
 });
