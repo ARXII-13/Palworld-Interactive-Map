@@ -19,4 +19,12 @@ LANGUAGE=en
 
 ## The script
 
-`node src/index.js`
+### Local / Web Development
+
+1. Run the script to generate the `pal-data-mining\output\mapObjects.json`.
+
+    ```bash
+    node src/index.js
+    ```
+
+2. Place the newly generated `mapObjects.json` under `pal-map\backend\src\assets\` for backend app to consume.

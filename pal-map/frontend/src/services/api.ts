@@ -1,10 +1,12 @@
 import axios, { type AxiosInstance } from "axios";
 import { useToast } from "vue-toastification";
 
+const PORT = 8013;
 const baseURL =
     window.location.hostname === "localhost"
-        ? "http://localhost:3000/api"
-        : `http://${window.location.hostname}:3000/api`;
+        ? `http://localhost:${PORT}/api`
+        : `http://${window.location.hostname}:${PORT}/api`;
+
 const api: AxiosInstance = axios.create({
     baseURL,
     timeout: 5000,

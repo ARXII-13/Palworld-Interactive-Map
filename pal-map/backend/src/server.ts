@@ -6,7 +6,7 @@ import logger from "./utils/logger.js";
 import { frontendPath, indexHtmlPath } from "./path.js";
 
 const app = express();
-const PORT = 3000;
+const PORT = 8013;
 
 app.use(express.static(frontendPath));
 app.use(
