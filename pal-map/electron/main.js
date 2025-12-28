@@ -5,6 +5,7 @@ const { fork } = require("child_process");
 let mainWindow;
 let backendProcess;
 const isDev = !app.isPackaged;
+const PORT = 8013;
 
 function createWindow() {
     mainWindow = new BrowserWindow({
@@ -19,7 +20,7 @@ function createWindow() {
 
     // Wait for backend to boot
     setTimeout(() => {
-        mainWindow.loadURL("http://localhost:3000");
+        mainWindow.loadURL(`http://localhost:${PORT}`);
     }, 1000);
 
     mainWindow.on("closed", () => {
