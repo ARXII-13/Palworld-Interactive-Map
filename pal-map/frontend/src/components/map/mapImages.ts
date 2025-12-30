@@ -18,6 +18,8 @@ export const mapImages = {
     enemyCampIcon: assetLoader.loadImage(`${MAP_ASSET_PATH}/T_icon_compass_EnemyCamp.webp`, "webp"),
     oilrigIcon: assetLoader.loadImage(`${MAP_ASSET_PATH}/T_icon_compass_Oilrig.webp`, "webp"),
     strongEnemyIcon: assetLoader.loadImage(`${MAP_ASSET_PATH}/T_icon_enemy_strong.webp`, "webp"),
+    treasureIcon: assetLoader.loadImage(`${MAP_ASSET_PATH}/T_icon_compass_treasure.webp`, "webp"),
+    eggIcon: assetLoader.loadImage(`${MAP_ASSET_PATH}/T_icon_compass_egg.webp`, "webp"),
     worldMap: assetLoader.loadImage(`${MAP_ASSET_PATH}/T_WorldMap_85.webp`, "webp"),
 };
 
@@ -60,6 +62,52 @@ export const mapIcons = {
         html: `
       <div class="marker-wrapper">  
         <img src="${mapImages.towerTravelPointIcon}" class="marker-base" />
+        <div class="marker-checkbox"></div>
+      </div>
+    `,
+        className: "custom-marker",
+        iconSize: [32, 32],
+        iconAnchor: [16 * 1.25, 16 * 1.25],
+        popupAnchor: [-4, -16],
+    }),
+    treasure: divIcon({
+        html: `
+      <div class="marker-wrapper">
+        <img src="${mapImages.treasureIcon}" class="marker-base-icon" />
+      </div>
+    `,
+        className: "custom-marker",
+        iconSize: [32, 32],
+        iconAnchor: [16 * 1.25, 16 * 1.25],
+        popupAnchor: [-4, -16],
+    }),
+    treasureChecked: divIcon({
+        html: `
+      <div class="marker-wrapper">  
+        <img src="${mapImages.treasureIcon}" class="marker-base-icon" />
+        <div class="marker-checkbox"></div>
+      </div>
+    `,
+        className: "custom-marker",
+        iconSize: [32, 32],
+        iconAnchor: [16 * 1.25, 16 * 1.25],
+        popupAnchor: [-4, -16],
+    }),
+    egg: divIcon({
+        html: `
+      <div class="marker-wrapper">
+        <img src="${mapImages.eggIcon}" class="marker-base-icon" />
+      </div>
+    `,
+        className: "custom-marker",
+        iconSize: [32, 32],
+        iconAnchor: [16 * 1.25, 16 * 1.25],
+        popupAnchor: [-4, -16],
+    }),
+    eggChecked: divIcon({
+        html: `
+      <div class="marker-wrapper">  
+        <img src="${mapImages.eggIcon}" class="marker-base-icon" />
         <div class="marker-checkbox"></div>
       </div>
     `,

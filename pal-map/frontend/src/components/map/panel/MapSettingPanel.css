@@ -33,10 +33,12 @@
     width: 100%;
 }
 
-.slide-item-label input[type="checkbox"] {
+.slide-item-control {
     margin: 0;
     transform: translateY(1px);
     flex-shrink: 0;
+    position: absolute;
+    right: 1rem;
 }
 
 .slide-item-icon {
@@ -51,11 +53,4 @@
     align-items: center;
     gap: 0.5rem;
     color: #f3f4f6;
-}
-
-.slide-item-label span.text-gray-500 {
-    margin-left: auto;
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: #9ca3af;
 }

@@ -2,21 +2,7 @@ import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 import fs from "fs";
 import logger from "../utils/logger.js";
-
-export interface MapPoint {
-    id: string;
-    name: string;
-    type: string;
-    position: MapObjectLocation;
-    discovered?: boolean;
-    metadata?: Record<string, any>;
-}
-
-export interface MapObjectLocation {
-    x: number;
-    y: number;
-    z: number;
-}
+import { MapObjectLocation, MapPoint } from "../types/mapPoint.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

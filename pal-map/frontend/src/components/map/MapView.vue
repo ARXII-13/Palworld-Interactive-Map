@@ -2,18 +2,33 @@
     <div class="relative w-full h-full">
         <div id="map" class="w-full h-full"></div>
 
-        <button
-            class="map-toggle-button"
-            :style="{ right: showPanel ? '19rem' : '1rem' }"
-            @click="showPanel = !showPanel"
-        >
-            {{ showPanel ? "⮝ Hide Filters" : "⮞ Show Filters" }}
-        </button>
+        <div class="map-toggle-button-container">
+            <button
+                class="map-toggle-button"
+                :style="{ right: !!activePanel ? '19rem' : '1rem' }"
+                @click="togglePanel('filters')"
+            >
+                {{ activePanel === "filters" ? "⮝ Hide Filters" : "⮞ Filters" }}
+            </button>
+
+            <button
+                class="map-toggle-button"
+                :style="{ right: !!activePanel ? '19rem' : '1rem' }"
+                @click="togglePanel('settings')"
+            >
+                {{ activePanel === "settings" ? "⮝ Hide Settings" : "⚙ Map Settings" }}
+            </button>
+        </div>
 
         <MapFilterPanel
-            :showPanel="showPanel"
+            v-if="activePanel === 'filters'"
             v-model="markerFilters"
             @filters-updated="onFiltersUpdated"
+        />
+
+        <MapSettingPanel
+            v-if="activePanel === 'settings'"
+            v-model:hideDiscoveredMarkers="mapSettings.hideDiscoveredMarkers"
         />
     </div>
 </template>
@@ -23,6 +38,7 @@ import { onMounted, watch, computed, ref, onUnmounted } from "vue";
 import L from "leaflet";
 import type { MapMarker, MapMarkerType, MapMarkerTypeFilter, MarkerProgress } from "@/types/map";
 import MapFilterPanel from "@/components/map/panel/MapFilterPanel.vue";
+import MapSettingPanel from "@/components/map/panel/MapSettingPanel.vue";
 import {
     MAP_SIZE,
     mapToWorld,
@@ -41,12 +57,12 @@ import "leaflet/dist/leaflet.css";
 import "@/components/map/MapView.css";
 import { addMarkerDiscoveryStatus, deleteMarkerDiscoveryStatus } from "@/services/marker";
 import { useToast } from "vue-toastification";
+import { defaultMapSettings, loadMapSettings, type MapSettings } from "@/services/mapSettings";
 
 const props = defineProps<{
     markers: MapMarker[];
 }>();
 
-const showPanel = ref(false);
 const markerFilters = ref({
     fastTravelPoint: {
         icon: mapImages.fastTravelPointIcon,
@@ -60,19 +76,52 @@ const markerFilters = ref({
         visible: true,
         totalCount: 0,
     },
+    treasure: {
+        icon: mapImages.treasureIcon,
+        label: "Treasure",
+        visible: true,
+        totalCount: 0,
+    },
+    egg: {
+        icon: mapImages.eggIcon,
+        label: "Egg",
+        visible: true,
+        totalCount: 0,
+    },
 } as Record<MapMarkerType, MapMarkerTypeFilter>);
+
+const activePanel = ref<"filters" | "settings" | null>(null);
+function togglePanel(panel: "filters" | "settings") {
+    activePanel.value = activePanel.value === panel ? null : panel;
+}
 
 const markerTypeToIcon: Record<string, L.Icon | L.DivIcon> = {
     fastTravelPoint: mapIcons.fastTravel,
     fastTravelPointChecked: mapIcons.fastTravelChecked,
     towerTravelPoint: mapIcons.towerTravel,
     towerTravelPointChecked: mapIcons.towerTravelChecked,
+    treasure: mapIcons.treasure,
+    treasureChecked: mapIcons.treasureChecked,
+    egg: mapIcons.egg,
+    eggChecked: mapIcons.eggChecked,
 };
 
 let map: L.Map;
 let markerLayer: L.LayerGroup;
 
-onMounted(() => {
+const mapSettings = ref<MapSettings>(defaultMapSettings);
+
+onMounted(async () => {
+    mapSettings.value = await loadMapSettings();
+
+    const appliedFilters = mapSettings.value.appliedFilters || [];
+    if (appliedFilters.length > 0) {
+        Object.keys(markerFilters.value).forEach((key) => {
+            markerFilters.value[key as MapMarkerType].visible = appliedFilters.includes(
+                key as MapMarkerType
+            ) as boolean;
+        });
+    }
     const bounds: L.LatLngBoundsExpression = [
         [0, 0] as L.LatLngTuple,
         [MAP_SIZE, MAP_SIZE] as L.LatLngTuple,
@@ -121,10 +170,14 @@ function updateMarkersCount() {
     const totalCounts: Record<MapMarkerType, number> = {
         fastTravelPoint: 0,
         towerTravelPoint: 0,
+        treasure: 0,
+        egg: 0,
     };
     const discoveredCounts: Record<MapMarkerType, number> = {
         fastTravelPoint: 0,
         towerTravelPoint: 0,
+        treasure: 0,
+        egg: 0,
     };
     props.markers.forEach((marker) => {
         const markerType = marker.type;
@@ -148,6 +201,16 @@ function updateMarkersCount() {
             totalCount: totalCounts.towerTravelPoint,
             discoveredCount: discoveredCounts.towerTravelPoint,
         },
+        treasure: {
+            ...markerFilters.value.treasure,
+            totalCount: totalCounts.treasure,
+            discoveredCount: discoveredCounts.treasure,
+        },
+        egg: {
+            ...markerFilters.value.egg,
+            totalCount: totalCounts.egg,
+            discoveredCount: discoveredCounts.egg,
+        },
     };
 }
 
@@ -155,9 +218,13 @@ function updateMarkers() {
     if (!markerLayer) return;
     markerLayer.clearLayers();
 
-    const visibleMarkers = props.markers.filter(
-        (marker) => markerFilters.value[marker.type].visible
-    );
+    const { hideDiscoveredMarkers, appliedFilters } = mapSettings.value;
+    console.log("Map settings:", appliedFilters);
+    const visibleMarkers = props.markers
+        .filter((marker) =>
+            appliedFilters && appliedFilters.length ? appliedFilters.includes(marker.type) : true
+        )
+        .filter((marker) => (hideDiscoveredMarkers ? !marker.discovered : true));
 
     visibleMarkers.forEach((m) => {
         const mapCoords = worldToMap(m.position.x, m.position.y);
@@ -270,8 +337,9 @@ function toggleMarkerProgress(markerType: MapMarkerType, markerId: string) {
     }
 }
 
-function onFiltersUpdated(newFilters: typeof markerFilters.value) {
+async function onFiltersUpdated(newFilters: typeof markerFilters.value) {
     markerFilters.value = { ...newFilters };
+    mapSettings.value = await loadMapSettings();
     updateMarkersCount();
     updateMarkers();
 }
@@ -283,6 +351,13 @@ watch(
         updateMarkers();
     },
     { deep: true, immediate: true }
+);
+
+watch(
+    () => mapSettings.value.hideDiscoveredMarkers,
+    () => {
+        updateMarkers();
+    }
 );
 </script>
 

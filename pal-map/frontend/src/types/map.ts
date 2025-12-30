@@ -1,4 +1,6 @@
-export type MapMarkerType = "fastTravelPoint" | "towerTravelPoint";
+export type MarkerSourceMode = "game" | "memory";
+
+export type MapMarkerType = "fastTravelPoint" | "towerTravelPoint" | "treasure" | "egg";
 
 export interface MapMarker {
     id: string;
@@ -12,7 +14,7 @@ export interface MapMarker {
 export interface MapMarkerTypeFilter {
     icon: string;
     label: string;
-    visible: true;
+    visible: boolean;
     totalCount: number;
     discoveredCount: number;
 }

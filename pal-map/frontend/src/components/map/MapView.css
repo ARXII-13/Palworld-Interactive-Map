@@ -7,8 +7,19 @@
     background-color: #1a1a1a;
 }
 
-.map-toggle-button {
+.map-toggle-button-container {
     position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.map-toggle-button {
+    position: relative;
     top: 1rem;
     right: 1rem;
     z-index: 1200;
@@ -47,6 +58,14 @@
     display: block;
     pointer-events: none;
     transform: scale(1.25);
+}
+
+.marker-base-icon {
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: none;
+    transform: scale(1.5);
 }
 
 .marker-checkbox,
