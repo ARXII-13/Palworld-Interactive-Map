@@ -4,20 +4,34 @@
             <h3>App Settings</h3>
         </header>
 
-        <!-- Marker source -->
         <div class="app-setting-item">
-            <label class="app-setting-label">Marker Source</label>
-
-            <select class="app-setting-control" v-model="appSettings.markerSourceMode">
+            <label class="app-setting-label" for="marker-source">
+                Marker Source
+                <span
+                    class="info-icon"
+                    title="By default, this app reads markers directly from the game files. If you have the UE4SS installled, then this app can read some realtime markers like chests or eggs from memory."
+                    >ℹ️</span
+                >
+            </label>
+            <select
+                id="marker-source"
+                class="app-setting-control"
+                v-model="appSettings.markerSourceMode"
+            >
                 <option value="game">Game</option>
                 <option value="memory">Memory</option>
             </select>
         </div>
 
-        <!-- UE4SS Folder -->
         <div class="app-setting-item">
-            <label class="app-setting-label">UE4SS Folder</label>
-
+            <label class="app-setting-label" for="ue4ss-folder">
+                UE4SS Folder
+                <span
+                    class="info-icon"
+                    title="Select the folder where UE4SS is installed. Or where the `xxxxxxx-ue4ss_actor_data.csv` files are located. For example: `C:\steam\steamapps\common\Palworld\Pal\Binaries\Win64\ue4ss`."
+                    >ℹ️</span
+                >
+            </label>
             <div class="folder-picker">
                 <button v-if="!showBrowserFallback" class="folder-button" @click="selectFolder">
                     Pick Folder
@@ -31,9 +45,9 @@
                     {{ appSettings.ue4ssFolderPath }}
                 </div>
 
-                <!-- Browser fallback -->
                 <div v-if="showBrowserFallback" class="browser-fallback">
                     <input
+                        id="ue4ss-folder"
                         type="text"
                         v-model="appSettings.ue4ssFolderPath"
                         placeholder="C:\steam\steamapps\common\Palworld\Pal\Binaries\Win64\ue4ss"
@@ -46,7 +60,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref, watch } from "vue";
-import "@/components/map/panel/MapSettingPanel.css";
+import "@/components/setting/AppSettingPanel.css";
 import {
     loadAppSettings,
     saveAppSettings,
@@ -60,6 +74,7 @@ const appSettings = ref<AppSettings>({
 
 const showBrowserFallback = ref(false);
 onMounted(async () => {
+    showBrowserFallback.value = !window.electron?.pickFolder;
     appSettings.value = await loadAppSettings();
 });
 
