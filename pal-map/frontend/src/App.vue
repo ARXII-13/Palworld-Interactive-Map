@@ -1,6 +1,6 @@
 <template>
     <div class="app-root">
-        <Sidebar :class="{ hidden: !sidebarOpen }" />
+        <Sidebar v-if="sidebarOpen" />
 
         <main class="main">
             <button class="sidebar-toggle" @click="toggleSidebar">
