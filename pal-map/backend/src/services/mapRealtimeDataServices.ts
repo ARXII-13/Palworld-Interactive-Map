@@ -99,6 +99,7 @@ export async function getMapRealtimeData(ue4ssFolder: string): Promise<MapPoint[
         type: obj.type || "Unknown",
         position: obj.position,
         discovered: false,
+        canBeDiscovered: false,
         metadata: {},
     }));
 

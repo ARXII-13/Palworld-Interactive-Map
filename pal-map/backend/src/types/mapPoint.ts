@@ -4,6 +4,7 @@ export interface MapPoint {
     type: string;
     position: MapObjectLocation;
     discovered?: boolean;
+    canBeDiscovered?: boolean;
     metadata?: Record<string, any>;
 }
 

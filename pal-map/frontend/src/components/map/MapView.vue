@@ -237,10 +237,14 @@ function updateMarkers() {
     <b>${m.name}</b>
     <div>Map: ${Math.round(mapCoords.x)}, ${Math.round(-mapCoords.y)}</div>
     <div>Game: ${Math.round(m.position.x)}, ${Math.round(m.position.y)}</div>
-    <label>
-      <input type="checkbox" id="chk-${m.id}" ${m.discovered ? "checked" : ""} />
-      <span>Discovered</span>
-    </label>
+        ${
+            m.canBeDiscovered
+                ? `<label>
+             <input type="checkbox" id="chk-${m.id}" ${m.discovered ? "checked" : ""} />
+             <span>Discovered</span>
+           </label>`
+                : ""
+        }
   </div>
 `;
 

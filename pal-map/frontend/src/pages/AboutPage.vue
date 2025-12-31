@@ -19,7 +19,7 @@
             <p>
                 <strong>Source:</strong>
                 <a
-                    href="https://github.com/your-github-username/palworld-interactive-map"
+                    href="https://github.com/ARXII-13/Palworld-Interactive-Map"
                     target="_blank"
                     class="text-yellow-400 hover:underline"
                 >

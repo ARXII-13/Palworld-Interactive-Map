@@ -24,9 +24,6 @@ import {
     type MapSettings,
 } from "@/services/settings/mapSettings";
 
-const props = defineProps<{
-    hideDiscoveredMarkers: boolean;
-}>();
 const emit = defineEmits<{
     (e: "update:hideDiscoveredMarkers", value: boolean): void;
 }>();

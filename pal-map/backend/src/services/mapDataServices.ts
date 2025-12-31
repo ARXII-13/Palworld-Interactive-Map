@@ -46,6 +46,7 @@ export async function getMapData(): Promise<MapPoint[]> {
         type: obj.type || "Unknown",
         position: convertToLatLng(obj.location.X, obj.location.Y, obj.location.Z),
         discovered: false,
+        canBeDiscovered: true,
         metadata: {},
     }));
 

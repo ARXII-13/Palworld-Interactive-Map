@@ -15,6 +15,7 @@ export interface MapMarker {
     type: MapMarkerType;
     position: MapObjectLocation;
     discovered: boolean;
+    canBeDiscovered: boolean;
     metadata?: Record<string, any>;
 }
 
