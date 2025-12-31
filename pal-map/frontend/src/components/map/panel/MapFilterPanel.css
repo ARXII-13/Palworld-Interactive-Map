@@ -2,60 +2,70 @@
     position: absolute;
     top: 0;
     right: 0;
-    height: 100%;
     width: 18rem;
-    background: rgba(18, 18, 18, 0.95);
-    backdrop-filter: blur(8px);
+    height: 100%;
+    z-index: 1200;
+
+    background-color: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(6px);
+
     border-left: 1px solid #374151;
     box-shadow: -2px 0 6px rgba(0, 0, 0, 0.5);
-    z-index: 1200;
-    overflow-y: hidden;
+
     padding: 1rem;
     box-sizing: border-box;
-    color: #f3f4f6;
 }
 
-.map-slide-panel h3 {
-    margin-bottom: 0.75rem;
-    color: #f3f4f6;
-}
-
-.map-slide-panel .slide-panel-container {
+.panel-content {
     display: flex;
     flex-direction: column;
+    height: 100%;
     gap: 0.75rem;
 }
 
-.slide-item-label > div {
+.panel-title {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #f3f4f6;
+}
+
+.filter-row {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    width: 100%;
+    cursor: pointer;
+    user-select: none;
+    color: #f3f4f6;
 }
 
-.slide-item-label input[type="checkbox"] {
+.filter-row input[type="checkbox"] {
     margin: 0;
-    transform: translateY(1px);
     flex-shrink: 0;
 }
 
-.slide-item-icon {
-    width: 32px;
-    height: 32px;
+.filter-icon {
+    width: 28px;
+    height: 28px;
     object-fit: contain;
     flex-shrink: 0;
 }
 
-.slide-item-label span {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: #f3f4f6;
+.filter-label {
+    flex: 1;
+    font-size: 0.9rem;
 }
 
-.slide-item-label span.text-gray-500 {
-    margin-left: auto;
+.filter-count {
     font-size: 0.75rem;
-    font-weight: 500;
     color: #9ca3af;
+    white-space: nowrap;
+}
+
+.panel-actions {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
 }

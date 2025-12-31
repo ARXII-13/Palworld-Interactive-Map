@@ -1,15 +1,16 @@
+import { MAP_MARKER_TYPES, type MapMarkerType } from "@/types/map";
 import { ref } from "vue";
 
 const SETTINGS_KEY = "palmap-map-settings";
 
 export interface MapSettings {
     hideDiscoveredMarkers: boolean;
-    appliedFilters?: string[];
+    appliedFilters: MapMarkerType[];
 }
 
 export const defaultMapSettings: MapSettings = {
     hideDiscoveredMarkers: false,
-    appliedFilters: [],
+    appliedFilters: MAP_MARKER_TYPES.map((type) => type),
 };
 
 export const mapSettings = ref<MapSettings>(defaultMapSettings);

@@ -1,35 +1,31 @@
 <template>
-    <div class="relative w-full h-full">
-        <div id="map" class="w-full h-full"></div>
+    <div class="map-container">
+        <div class="map-root">
+            <div id="map"></div>
 
-        <div class="map-toggle-button-container">
-            <button
-                class="map-toggle-button"
-                :style="{ right: !!activePanel ? '19rem' : '1rem' }"
-                @click="togglePanel('filters')"
-            >
-                {{ activePanel === "filters" ? "⮝ Hide Filters" : "⮞ Filters" }}
-            </button>
+            <!-- Toggle buttons -->
+            <div class="map-toggle-buttons" :class="{ 'panel-open': !!activePanel }">
+                <button class="map-toggle-button" @click="togglePanel('filters')">
+                    {{ activePanel === "filters" ? "⮝ Hide Filters" : "⮞ Filters" }}
+                </button>
 
-            <button
-                class="map-toggle-button"
-                :style="{ right: !!activePanel ? '19rem' : '1rem' }"
-                @click="togglePanel('settings')"
-            >
-                {{ activePanel === "settings" ? "⮝ Hide Settings" : "⚙ Map Settings" }}
-            </button>
+                <button class="map-toggle-button" @click="togglePanel('settings')">
+                    {{ activePanel === "settings" ? "⮝ Hide Settings" : "⚙ Map Settings" }}
+                </button>
+            </div>
+
+            <!-- Panels -->
+            <MapFilterPanel
+                v-if="activePanel === 'filters'"
+                v-model="markerFilters"
+                @filters-updated="onFiltersUpdated"
+            />
+
+            <MapSettingPanel
+                v-if="activePanel === 'settings'"
+                v-model:hideDiscoveredMarkers="mapSettings.hideDiscoveredMarkers"
+            />
         </div>
-
-        <MapFilterPanel
-            v-if="activePanel === 'filters'"
-            v-model="markerFilters"
-            @filters-updated="onFiltersUpdated"
-        />
-
-        <MapSettingPanel
-            v-if="activePanel === 'settings'"
-            v-model:hideDiscoveredMarkers="mapSettings.hideDiscoveredMarkers"
-        />
     </div>
 </template>
 
@@ -57,7 +53,11 @@ import "leaflet/dist/leaflet.css";
 import "@/components/map/MapView.css";
 import { addMarkerDiscoveryStatus, deleteMarkerDiscoveryStatus } from "@/services/marker";
 import { useToast } from "vue-toastification";
-import { defaultMapSettings, loadMapSettings, type MapSettings } from "@/services/mapSettings";
+import {
+    defaultMapSettings,
+    loadMapSettings,
+    type MapSettings,
+} from "@/services/settings/mapSettings";
 
 const props = defineProps<{
     markers: MapMarker[];
@@ -115,13 +115,11 @@ onMounted(async () => {
     mapSettings.value = await loadMapSettings();
 
     const appliedFilters = mapSettings.value.appliedFilters || [];
-    if (appliedFilters.length > 0) {
-        Object.keys(markerFilters.value).forEach((key) => {
-            markerFilters.value[key as MapMarkerType].visible = appliedFilters.includes(
-                key as MapMarkerType
-            ) as boolean;
-        });
-    }
+    Object.keys(markerFilters.value).forEach((key) => {
+        markerFilters.value[key as MapMarkerType].visible = appliedFilters.includes(
+            key as MapMarkerType
+        ) as boolean;
+    });
     const bounds: L.LatLngBoundsExpression = [
         [0, 0] as L.LatLngTuple,
         [MAP_SIZE, MAP_SIZE] as L.LatLngTuple,
@@ -140,7 +138,14 @@ onMounted(async () => {
         maxZoom: 3,
         maxBounds: bounds,
         maxBoundsViscosity: 1,
+        zoomControl: false,
     });
+
+    L.control
+        .zoom({
+            position: "bottomleft",
+        })
+        .addTo(map);
 
     L.imageOverlay(mapImages.worldMap, bounds).addTo(map);
     map.fitBounds(bounds);
@@ -219,11 +224,8 @@ function updateMarkers() {
     markerLayer.clearLayers();
 
     const { hideDiscoveredMarkers, appliedFilters } = mapSettings.value;
-    console.log("Map settings:", appliedFilters);
     const visibleMarkers = props.markers
-        .filter((marker) =>
-            appliedFilters && appliedFilters.length ? appliedFilters.includes(marker.type) : true
-        )
+        .filter((marker) => appliedFilters.includes(marker.type))
         .filter((marker) => (hideDiscoveredMarkers ? !marker.discovered : true));
 
     visibleMarkers.forEach((m) => {

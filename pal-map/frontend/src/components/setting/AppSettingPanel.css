@@ -1,0 +1,56 @@
+*/ .app-setting-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 520px;
+}
+
+.app-setting-header h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #f3f4f6;
+}
+
+.app-setting-item {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.app-setting-label {
+    color: #e5e7eb;
+    font-size: 0.9rem;
+}
+
+.app-setting-control {
+    width: fit-content;
+    padding: 0.35rem 0.5rem;
+}
+
+.folder-picker {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.folder-button {
+    width: fit-content;
+}
+
+.folder-path {
+    font-weight: 500;
+    color: #d1d5db;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.browser-fallback input {
+    width: 100%;
+    padding: 0.4rem;
+    border-radius: 4px;
+    border: 1px solid #4b5563;
+    background: #111827;
+    color: #f3f4f6;
+}

@@ -1,23 +1,16 @@
 <template>
     <transition name="slide">
-        <div class="map-slide-panel">
-            <div class="slide-panel-container">
-                <h3 class="text-lg font-semibold mb-3 text-gray-800">Map Settings</h3>
+        <aside class="map-slide-panel">
+            <div class="panel-content">
+                <h3 class="panel-title">Map Settings</h3>
 
-                <label class="flex items-center cursor-pointer slide-item-label">
-                    <div class="flex items-center gap-2 w-full">
-                        <span class="flex items-center gap-2">
-                            <span>Hide Discovered Markers</span>
-                        </span>
-                        <input
-                            type="checkbox"
-                            class="slide-item-control"
-                            v-model="mapSettings.hideDiscoveredMarkers"
-                        />
-                    </div>
+                <label class="setting-row">
+                    <span class="setting-label"> Hide Discovered Markers </span>
+
+                    <input type="checkbox" v-model="mapSettings.hideDiscoveredMarkers" />
                 </label>
             </div>
-        </div>
+        </aside>
     </transition>
 </template>
 
@@ -29,9 +22,11 @@ import {
     loadMapSettings,
     saveMapSettings,
     type MapSettings,
-} from "@/services/mapSettings";
+} from "@/services/settings/mapSettings";
 
-const props = defineProps<MapSettings>();
+const props = defineProps<{
+    hideDiscoveredMarkers: boolean;
+}>();
 const emit = defineEmits<{
     (e: "update:hideDiscoveredMarkers", value: boolean): void;
 }>();

@@ -1,34 +1,29 @@
 <template>
     <transition name="slide">
-        <div class="map-slide-panel">
-            <div class="slide-panel-container">
-                <h3 class="text-lg font-semibold mb-3 text-gray-800">Map Filters</h3>
-                <label
-                    v-for="(value, key) in filters"
-                    :key="key"
-                    class="flex items-center cursor-pointer slide-item-label"
-                >
-                    <div class="flex items-center gap-2 w-full">
-                        <input type="checkbox" v-model="value.visible" @change="emitFilters" />
-                        <span class="flex items-center gap-2">
-                            <img :src="value.icon" class="slide-item-icon" :alt="key" />
-                            <span>{{ value.label }}</span>
-                        </span>
-                        <span class="text-gray-500">
-                            {{ value.discoveredCount }}/{{ value.totalCount }}
-                        </span>
-                    </div>
+        <aside class="map-slide-panel">
+            <div class="panel-content">
+                <h3 class="panel-title">Map Filters</h3>
+
+                <label v-for="(filter, key) in filters" :key="key" class="filter-row">
+                    <input type="checkbox" v-model="filter.visible" @change="emitFilters" />
+
+                    <img :src="filter.icon" class="filter-icon" :alt="filter.label" />
+
+                    <span class="filter-label">
+                        {{ filter.label }}
+                    </span>
+
+                    <span class="filter-count">
+                        {{ filter.discoveredCount }}/{{ filter.totalCount }}
+                    </span>
                 </label>
-                <div class="mt-auto pt-3 border-t border-gray-200 flex justify-between text-xs">
-                    <button class="text-blue-600 hover:underline" @click="setAll(true)">
-                        Show All
-                    </button>
-                    <button class="text-gray-500 hover:underline" @click="setAll(false)">
-                        Hide All
-                    </button>
+
+                <div class="panel-actions">
+                    <button @click="setAll(true)">Show All</button>
+                    <button @click="setAll(false)">Hide All</button>
                 </div>
             </div>
-        </div>
+        </aside>
     </transition>
 </template>
 
@@ -41,7 +36,7 @@ import {
     loadMapSettings,
     saveMapSettings,
     type MapSettings,
-} from "@/services/mapSettings";
+} from "@/services/settings/mapSettings";
 
 const props = defineProps<{
     modelValue: Record<MapMarkerType, MapMarkerTypeFilter>;
@@ -87,7 +82,8 @@ function setAll(value: boolean) {
 async function onFilterChange(filters: Record<MapMarkerType, MapMarkerTypeFilter>) {
     mapSettings.value.appliedFilters = Object.entries(filters)
         .filter(([_, filter]) => filter.visible)
-        .map(([markerType, _]) => markerType);
+        .map(([markerType, _]) => markerType as MapMarkerType);
+
     await saveMapSettings(mapSettings.value);
     emit("filters-updated", filters);
 }

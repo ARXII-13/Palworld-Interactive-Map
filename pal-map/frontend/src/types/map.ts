@@ -2,6 +2,13 @@ export type MarkerSourceMode = "game" | "memory";
 
 export type MapMarkerType = "fastTravelPoint" | "towerTravelPoint" | "treasure" | "egg";
 
+export const MAP_MARKER_TYPES = [
+    "fastTravelPoint",
+    "towerTravelPoint",
+    "treasure",
+    "egg",
+] as const satisfies readonly MapMarkerType[];
+
 export interface MapMarker {
     id: string;
     name: string;
