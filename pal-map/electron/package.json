@@ -55,7 +55,7 @@
         ],
         "win": {
             "target": "portable",
-            "icon": "icon.ico"
+            "icon": "assets/palworld_interactive_map.ico"
         }
     }
 }

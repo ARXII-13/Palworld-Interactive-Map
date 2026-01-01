@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const path = require("path");
 const { fork } = require("child_process");
+const fs = require("fs");
 
 let mainWindow;
 let backendProcess;

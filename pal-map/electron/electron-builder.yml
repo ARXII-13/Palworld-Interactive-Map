@@ -14,7 +14,7 @@ files:
 win:
     target:
         - portable
-    icon: "assets/icon.ico"
+    icon: "assets/palworld_interactive_map.ico"
 extraResources:
     - from: "../frontend/build"
       to: "frontend/build"
