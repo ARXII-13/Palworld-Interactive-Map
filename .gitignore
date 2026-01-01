@@ -1,0 +1,54 @@
+# --------------------------------------------------
+# 🔧 Node / Vite / TypeScript Project
+# --------------------------------------------------
+
+# Node dependencies
+node_modules/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+bun.lockb
+
+# Build outputs
+build/
+dist/
+out/
+.cache/
+.tmp/
+temp/
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# TypeScript
+*.tsbuildinfo
+
+# Vite specific
+vite.config.ts.timestamp*
+.vite/
+frontend/.vite/
+frontend/node_modules/
+frontend/build/
+frontend/dist/
+
+pal-map/data/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Python environment (if you ever experiment with python scripts)
+.venv/
+
+# OS Files
+ehthu

@@ -1,0 +1,6 @@
+{
+    "delay": "300ms",
+    "watch": ["src"],
+    "ext": "ts,json",
+    "exec": "node --loader ts-node/esm src/server.ts"
+}

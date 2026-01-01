@@ -1,0 +1,61 @@
+{
+    "name": "palmap-desktop",
+    "version": "1.0.0",
+    "main": "main.js",
+    "description": "Palworld Interactive Map Desktop",
+    "author": "ARX II-13",
+    "scripts": {
+        "start": "electron .",
+        "build": "electron-builder",
+        "build-app": "cd ../backend && npm run build && cd ../frontend && npm run build && cd ../electron && electron-builder"
+    },
+    "devDependencies": {
+        "electron": "^33.0.0",
+        "electron-builder": "^24.13.3",
+        "electron-rebuild": "^3.2.9"
+    },
+    "dependencies": {
+        "express": "^4.21.2",
+        "open": "^7.4.2"
+    },
+    "build": {
+        "appId": "com.palmap.desktop",
+        "productName": "Palworld Interactive Map",
+        "directories": {
+            "output": "../dist"
+        },
+        "files": [
+            "**/*",
+            "./preload.js",
+            "../backend/build/**/*",
+            "../backend/node_modules/**/*",
+            "../frontend/build/**/*",
+            "../frontend/node_modules/**/*"
+        ],
+        "asarUnpack": [
+            "preload.js"
+        ],
+        "extraResources": [
+            {
+                "from": "../frontend/build",
+                "to": "frontend/build"
+            },
+            {
+                "from": "../frontend/node_modules",
+                "to": "frontend/node_modules"
+            },
+            {
+                "from": "../backend/build",
+                "to": "backend/build"
+            },
+            {
+                "from": "../backend/node_modules",
+                "to": "backend/node_modules"
+            }
+        ],
+        "win": {
+            "target": "portable",
+            "icon": "assets/palworld_interactive_map.ico"
+        }
+    }
+}

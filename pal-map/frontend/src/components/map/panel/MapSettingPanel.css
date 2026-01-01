@@ -1,0 +1,49 @@
+.map-slide-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 18rem;
+    height: 100%;
+    z-index: 1200;
+
+    background-color: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(6px);
+
+    border-left: 1px solid #374151;
+    box-shadow: -2px 0 6px rgba(0, 0, 0, 0.5);
+
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.panel-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.panel-title {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #f3f4f6;
+}
+
+.setting-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    cursor: pointer;
+    user-select: none;
+    color: #f3f4f6;
+}
+
+.setting-label {
+    font-size: 0.9rem;
+}
+
+.setting-row input[type="checkbox"] {
+    margin: 0;
+    flex-shrink: 0;
+}

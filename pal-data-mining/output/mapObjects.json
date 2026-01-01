@@ -1,0 +1,892 @@
+[
+    {
+        "id": "FTPoint1",
+        "label": "Mount Obsidian - Midpoint",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -327531.78,
+            "Y": -70410.55,
+            "Z": 18970.016
+        }
+    },
+    {
+        "id": "ElectricBoss",
+        "label": "Tower of the Brothers of the Eternal Pyre",
+        "type": "towerTravelPoint",
+        "location": {
+            "X": -361899.3,
+            "Y": -112096.125,
+            "Z": 67925.78
+        }
+    },
+    {
+        "id": "FTPoint3",
+        "label": "Eternal Pyre Tower Entrance",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -367707.78,
+            "Y": -114950.9,
+            "Z": 61380.66
+        }
+    },
+    {
+        "id": "FTPoint4",
+        "label": "Ancient Civilization Ruins",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -414446.72,
+            "Y": -24603.322,
+            "Z": 3560.0862
+        }
+    },
+    {
+        "id": "FTPoint5",
+        "label": "Fisherman's Point",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -465895,
+            "Y": -62137.754,
+            "Z": -1834.4438
+        }
+    },
+    {
+        "id": "FTPoint6",
+        "label": "Mount Obsidian - Anubis Statue",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -416557.53,
+            "Y": -90012.16,
+            "Z": 23301.867
+        }
+    },
+    {
+        "id": "FTPoint7",
+        "label": "Beach of Everlasting Summer",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -383183.16,
+            "Y": -210790.92,
+            "Z": 819.818
+        }
+    },
+    {
+        "id": "FTPoint8",
+        "label": "Ruined Fortress City",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -236773.34,
+            "Y": -100042.35,
+            "Z": 516.5124
+        }
+    },
+    {
+        "id": "FTPoint9",
+        "label": "PIDF Tower Entrance",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": 29780.533,
+            "Y": 406913.2,
+            "Z": 15662.839
+        }
+    },
+    {
+        "id": "DesertBoss",
+        "label": "Tower of the PIDF",
+        "type": "towerTravelPoint",
+        "location": {
+            "X": 29655.422,
+            "Y": 413476.84,
+            "Z": 22226.781
+        }
+    },
+    {
+        "id": "FTPoint11",
+        "label": "Sand Dunes Entrance",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -50300.984,
+            "Y": 287392.38,
+            "Z": 295.78598
+        }
+    },
+    {
+        "id": "FTPoint12",
+        "label": "Duneshelter",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": 35588.66,
+            "Y": 321331.25,
+            "Z": 623.0466
+        }
+    },
+    {
+        "id": "FTPoint13",
+        "label": "Deep Sand Dunes",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": 117624.25,
+            "Y": 400134.78,
+            "Z": -1931.7037
+        }
+    },
+    {
+        "id": "FTPoint14",
+        "label": "Cold Shore",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -119037.29,
+            "Y": 138340.36,
+            "Z": -1220.292
+        }
+    },
+    {
+        "id": "FTPoint15",
+        "label": "No Man's Trail",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -80506.16,
+            "Y": 141464.77,
+            "Z": 8140.1357
+        }
+    },
+    {
+        "id": "FTPoint16",
+        "label": "Icy Weasel Hill",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -39402.426,
+            "Y": 159611.86,
+            "Z": 17025.168
+        }
+    },
+    {
+        "id": "FTPoint17",
+        "label": "Unthawable Lake",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": 8000.5303,
+            "Y": 111770.55,
+            "Z": 2554.3777
+        }
+    },
+    {
+        "id": "FTPoint18",
+        "label": "Land of Absolute Zero",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": 102159.82,
+            "Y": 48527.027,
+            "Z": 28428.287
+        }
+    },
+    {
+        "id": "SnowBoss",
+        "label": "Tower of the PAL Genetic Research Unit",
+        "type": "towerTravelPoint",
+        "location": {
+            "X": 81169.945,
+            "Y": 90254.086,
+            "Z": 70518.78
+        }
+    },
+    {
+        "id": "FTPoint20",
+        "label": "PAL Genetic Research Unit Tower Entrance",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": 89644.01,
+            "Y": 94542.2,
+            "Z": 67275.08
+        }
+    },
+    {
+        "id": "FTPoint83",
+        "label": "Feybreak Shipwreck",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -798776.8,
+            "Y": -479574.8,
+            "Z": -2050.2622
+        }
+    },
+    {
+        "id": "FTPoint63",
+        "label": "Arena Entrance",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -117215.02,
+            "Y": 446689.97,
+            "Z": -1887.2981
+        }
+    },
+    {
+        "id": "FTPoint64",
+        "label": "Sakurajima - Mushroom Wetlands",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -63520.734,
+            "Y": -55005.938,
+            "Z": -1711.8119
+        }
+    },
+    {
+        "id": "FTPoint65",
+        "label": "Sakurajima - Southern Sandbar",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -86709.57,
+            "Y": -140441.75,
+            "Z": -2030.9984
+        }
+    },
+    {
+        "id": "SakurajimaBoss",
+        "label": "Moonflower Tower",
+        "type": "towerTravelPoint",
+        "location": {
+            "X": -29488.742,
+            "Y": -116237.945,
+            "Z": 12938.316
+        }
+    },
+    {
+        "id": "FTPoint67",
+        "label": "Moonflower Tower Entrance",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -25522.21,
+            "Y": -118365.34,
+            "Z": 6257.67
+        }
+    },
+    {
+        "id": "FTPoint68",
+        "label": "Cherry Blossom Crossroads",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -25915.371,
+            "Y": -78926.164,
+            "Z": 3126.5598
+        }
+    },
+    {
+        "id": "FTPoint69",
+        "label": "Sakurajima - Northern Rock Field",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": 32787.098,
+            "Y": -81420.33,
+            "Z": -2019.838
+        }
+    },
+    {
+        "id": "FTPoint70",
+        "label": "Secluded Cemetery",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -2188.7988,
+            "Y": -148545.86,
+            "Z": 2988.4814
+        }
+    },
+    {
+        "id": "FTPoint71",
+        "label": "Scorched Ashland",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -503990,
+            "Y": -214380,
+            "Z": -1830
+        }
+    },
+    {
+        "id": "FTPoint72",
+        "label": "Stone Pillar Cave Entrance",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -588140,
+            "Y": -253780,
+            "Z": 720
+        }
+    },
+    {
+        "id": "FTPoint73",
+        "label": "Loess Plains",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -792350,
+            "Y": -251110,
+            "Z": -540
+        }
+    },
+    {
+        "id": "FTPoint74",
+        "label": "Hidden Passage to the Oculus Gate",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -698514.94,
+            "Y": -322880.4,
+            "Z": 15540
+        }
+    },
+    {
+        "id": "FTPoint75",
+        "label": "The Oculus Gate, Tower in Sight",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -760285.44,
+            "Y": -354966.22,
+            "Z": 4300.4717
+        }
+    },
+    {
+        "id": "FTPoint76",
+        "label": "Feybreak Tower Entrance",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -888080,
+            "Y": -433080,
+            "Z": 19030
+        }
+    },
+    {
+        "id": "VikingBoss",
+        "label": "Feybreak Tower",
+        "type": "towerTravelPoint",
+        "location": {
+            "X": -889646.3,
+            "Y": -435717.28,
+            "Z": 25751.701
+        }
+    },
+    {
+        "id": "FTPoint78",
+        "label": "Scorched Hill",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -699510,
+            "Y": -389030,
+            "Z": 32620
+        }
+    },
+    {
+        "id": "FTPoint79",
+        "label": "Deserted Ash Plateau",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -591120,
+            "Y": -484260,
+            "Z": 6808.7915
+        }
+    },
+    {
+        "id": "FTPoint80",
+        "label": "Emberstone Plateau",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -671901.25,
+            "Y": -172407.56,
+            "Z": -443.9525
+        }
+    },
+    {
+        "id": "FTPoint81",
+        "label": "Shield Dragon Tunnel",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -572461.56,
+            "Y": -287224.06,
+            "Z": 45.334076
+        }
+    },
+    {
+        "id": "FTPoint59",
+        "label": "Forgotten Island Church Ruins",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -130060.375,
+            "Y": -53406.69,
+            "Z": 1715.6251
+        }
+    },
+    {
+        "id": "FTPoint60",
+        "label": "Marsh Island Church Ruins",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -250506.48,
+            "Y": 341109.6,
+            "Z": 2293.3206
+        }
+    },
+    {
+        "id": "FTPoint86",
+        "label": "Isle of the Glacial Core",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": 168489,
+            "Y": 221797.6,
+            "Z": -2020.1418
+        }
+    },
+    {
+        "id": "FTPoint85",
+        "label": "Oasis Isle",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -33882.15,
+            "Y": 564292.5,
+            "Z": -2102.5835
+        }
+    },
+    {
+        "id": "FTPoint89",
+        "label": "Isle of Decayed Treasures",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -197915.22,
+            "Y": 438001.44,
+            "Z": -2064.6843
+        }
+    },
+    {
+        "id": "FTPoint84",
+        "label": "Sunlit Isle",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -335853.84,
+            "Y": 335361.28,
+            "Z": -2090.0576
+        }
+    },
+    {
+        "id": "FTPoint87",
+        "label": "Frostbitten Isle",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -558410.44,
+            "Y": 121112.1,
+            "Z": -1587.2306
+        }
+    },
+    {
+        "id": "FTPoint90",
+        "label": "Sealed Realm of Terraria",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -488718.2,
+            "Y": -35724.94,
+            "Z": -2096.6929
+        }
+    },
+    {
+        "id": "FTPoint88",
+        "label": "Phantom Isle",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -209326.02,
+            "Y": -249227.56,
+            "Z": -2089.9614
+        }
+    },
+    {
+        "id": "FTPoint61",
+        "label": "Bridge of the Twin Knights",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -294830,
+            "Y": 152240,
+            "Z": 190
+        }
+    },
+    {
+        "id": "FTPoint62",
+        "label": "Ravine Entrance",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -319000,
+            "Y": 127170,
+            "Z": -2049.4475
+        }
+    },
+    {
+        "id": "FTPoint49",
+        "label": "Forgotten Island",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -137210,
+            "Y": -91340,
+            "Z": -2090
+        }
+    },
+    {
+        "id": "FTPoint50",
+        "label": "Ice Wind Island",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -88645.85,
+            "Y": -3922.8848,
+            "Z": -876.45087
+        }
+    },
+    {
+        "id": "FTPoint51",
+        "label": "Kelpsea Hill",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -170400,
+            "Y": -29240,
+            "Z": -1930
+        }
+    },
+    {
+        "id": "FTPoint52",
+        "label": "Sea Breeze Archipelago - Castaway Beach",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -450320,
+            "Y": 112630,
+            "Z": -2090
+        }
+    },
+    {
+        "id": "FTPoint53",
+        "label": "Sea Breeze Archipelago Church",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -376750,
+            "Y": 124630,
+            "Z": 2270
+        }
+    },
+    {
+        "id": "FTPoint54",
+        "label": "Small Cove",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -374180,
+            "Y": 63960,
+            "Z": -1920
+        }
+    },
+    {
+        "id": "FTPoint55",
+        "label": "Islandhopper Coast",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -265980,
+            "Y": 268690,
+            "Z": -1970
+        }
+    },
+    {
+        "id": "FTPoint56",
+        "label": "Marsh Island",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -282110,
+            "Y": 355570,
+            "Z": -1940
+        }
+    },
+    {
+        "id": "FTPoint57",
+        "label": "Eastern Wild Island",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -170718.69,
+            "Y": 409753.16,
+            "Z": 4049.16
+        }
+    },
+    {
+        "id": "FTPoint58",
+        "label": "Natural Bridge",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -221399.27,
+            "Y": 330684.53,
+            "Z": -1744.8054
+        }
+    },
+    {
+        "id": "GrassBoss",
+        "label": "Tower of the Rayne Syndicate",
+        "type": "towerTravelPoint",
+        "location": {
+            "X": -321844.94,
+            "Y": 209097.66,
+            "Z": 6676.6313
+        }
+    },
+    {
+        "id": "ForestBoss",
+        "label": "Tower of the Free Pal Alliance",
+        "type": "towerTravelPoint",
+        "location": {
+            "X": -110130.67,
+            "Y": 241503.55,
+            "Z": 25535.498
+        }
+    },
+    {
+        "id": "FTPoint41",
+        "label": "Cinnamoth Forest",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -248770.11,
+            "Y": 126205.84,
+            "Z": 5847.363
+        }
+    },
+    {
+        "id": "FTPoint42",
+        "label": "Sealed Realm of the Swordmaster",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -338560,
+            "Y": 107660,
+            "Z": -1390
+        }
+    },
+    {
+        "id": "FTPoint43",
+        "label": "Deep Bamboo Thicket",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -215388.52,
+            "Y": 8854.223,
+            "Z": 13174.679
+        }
+    },
+    {
+        "id": "FTPoint44",
+        "label": "Sealed Realm of the Winged Tyrant",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -195236.17,
+            "Y": 36718.49,
+            "Z": 8293.606
+        }
+    },
+    {
+        "id": "FTPoint48",
+        "label": "Pristine Snow Field",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": 6.0000005,
+            "Y": -0.000048830407,
+            "Z": 6588.961
+        }
+    },
+    {
+        "id": "FTPoint25",
+        "label": "Ascetic Falls",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -326403.84,
+            "Y": 55136.727,
+            "Z": 6871.9824
+        }
+    },
+    {
+        "id": "FTPoint26",
+        "label": "Foot of the Volcano",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -349535.5,
+            "Y": -4035.1057,
+            "Z": 859.367
+        }
+    },
+    {
+        "id": "FTPoint29",
+        "label": "Sealed Realm of the Thunder Dragon",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -283781,
+            "Y": 59352.684,
+            "Z": 5251.3853
+        }
+    },
+    {
+        "id": "FTPoint30",
+        "label": "Investigator's Fork",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -218636.78,
+            "Y": 58528.145,
+            "Z": 3731.1538
+        }
+    },
+    {
+        "id": "FTPoint31",
+        "label": "Ancient Ritual Site",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -257951.39,
+            "Y": 151247.84,
+            "Z": 7.6625714
+        }
+    },
+    {
+        "id": "FTPoint32",
+        "label": "Mount Flopie Summit",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -167684.92,
+            "Y": 167519.23,
+            "Z": 9175.596
+        }
+    },
+    {
+        "id": "FTPoint33",
+        "label": "Lake Center",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -221230,
+            "Y": 165130,
+            "Z": -40
+        }
+    },
+    {
+        "id": "FTPoint34",
+        "label": "Hypocrite Hill",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -237610,
+            "Y": 190610,
+            "Z": 3987.783
+        }
+    },
+    {
+        "id": "FTPoint35",
+        "label": "Sealed Realm of the Guardian",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -151783.97,
+            "Y": 213200.86,
+            "Z": 3277.1216
+        }
+    },
+    {
+        "id": "FTPoint36",
+        "label": "Snowy Mountain Crossroads",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -125290,
+            "Y": 201720,
+            "Z": 6920
+        }
+    },
+    {
+        "id": "FTPoint37",
+        "label": "Free Pal Alliance Tower Entrance",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -103434.984,
+            "Y": 234761.17,
+            "Z": 19438.463
+        }
+    },
+    {
+        "id": "FTPoint38",
+        "label": "Sealed Realm of the Swift",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -115430,
+            "Y": 289090,
+            "Z": 3045.1614
+        }
+    },
+    {
+        "id": "FTPoint39",
+        "label": "Mossanda Forest",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -177770,
+            "Y": 265010,
+            "Z": 873.1743
+        }
+    },
+    {
+        "id": "FTPoint40",
+        "label": "Gobfin's Turf",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -219172.86,
+            "Y": 226394.84,
+            "Z": -1956.383
+        }
+    },
+    {
+        "id": "FTPoint45",
+        "label": "Rayne Syndicate Tower Entrance",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -317777.2,
+            "Y": 212103.31,
+            "Z": -762.5511
+        }
+    },
+    {
+        "id": "FTPoint21",
+        "label": "Grassy Behemoth Hills",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -342035,
+            "Y": 236885,
+            "Z": -1751.6062
+        }
+    },
+    {
+        "id": "FTPoint22",
+        "label": "Desolate Church",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -314840,
+            "Y": 186850,
+            "Z": 3270
+        }
+    },
+    {
+        "id": "FTPoint23",
+        "label": "Plateau of Beginnings",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -358785,
+            "Y": 267940,
+            "Z": 7910
+        }
+    },
+    {
+        "id": "FTPoint24",
+        "label": "Small Settlement",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -346617.56,
+            "Y": 191706.6,
+            "Z": -308.70828
+        }
+    },
+    {
+        "id": "FTPoint27",
+        "label": "Sealed Realm of the Frozen Wings",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -278468.03,
+            "Y": 212679.42,
+            "Z": -910.3164
+        }
+    },
+    {
+        "id": "FTPoint28",
+        "label": "Fort Ruins",
+        "type": "fastTravelPoint",
+        "location": {
+            "X": -302825,
+            "Y": 241060,
+            "Z": -1089.6859
+        }
+    }
+]
