@@ -10,7 +10,6 @@ export interface AppSettings {
 
 export const defaultSettings: AppSettings = {
     markerSourceMode: "game",
-    ue4ssFolderPath: undefined,
 };
 
 export const appSettings = ref<AppSettings>(defaultSettings);
@@ -18,7 +17,7 @@ export const appSettings = ref<AppSettings>(defaultSettings);
 export async function loadAppSettings(): Promise<AppSettings> {
     if (window.electron?.loadSettings) {
         const allSettings = await window.electron.loadSettings();
-        if (allSettings.appSettings) {
+        if (allSettings && allSettings.appSettings) {
             appSettings.value = allSettings.appSettings as AppSettings;
         } else {
             appSettings.value = defaultSettings;
@@ -33,11 +32,16 @@ export async function loadAppSettings(): Promise<AppSettings> {
 
 export async function saveAppSettings(settings: AppSettings) {
     if (window.electron?.saveSettings) {
-        const allSettings = await window.electron.loadSettings();
-        await window.electron.saveSettings({
+        let allSettings = await window.electron?.loadSettings();
+        if (!allSettings) {
+            allSettings = {};
+        }
+
+        const newSettings = {
             ...allSettings,
             appSettings: settings,
-        });
+        };
+        await window.electron.saveSettings(JSON.parse(JSON.stringify(newSettings)));
     } else {
         localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
     }

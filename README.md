@@ -161,12 +161,12 @@ To make it easier to track these respawning items, this feature reads all active
 
 4. **Dump actors to a CSV file** via the UE4SS menu:  
    `Dumpers -> Dump all actors to file`
-
+   ![UE4SS_MENU](assets/screenshots/ue4ss_dump_actor.png)
 5. After dumping, you should see a file like:  
    `xxxxxxxx-ue4ss_actor_data.csv`  
    located in:  
    `G:\steam\steamapps\common\Palworld\Pal\Binaries\Win64\ue4ss`
-
+   ![UE4SS_CSV](assets/screenshots/ue4ss_actor_csv.png)
 6. **Open Palworld Interactive Map**, go to **Settings**, switch the **Marker Source** from `Game` to `Memory`, and select the UE4SS folder you just used:  
    `G:\steam\steamapps\common\Palworld\Pal\Binaries\Win64\ue4ss`
 
@@ -177,6 +177,23 @@ To make it easier to track these respawning items, this feature reads all active
 - Memory data is **not updated in real-time**.
 - Users must manually dump actors via the UE4SS tool and refresh the Palworld Interactive Map to update markers.
 - Future improvements may automate this process to reduce manual steps.
+
+## Screenshots
+
+Here are some screenshots of Palworld Interactive Map to give you a better idea of the UI and features.
+
+### Map View
+
+![Map View](assets/screenshots/map_view.png)
+
+### App Settings
+
+![Settings Panel](assets/screenshots/app_setting.png)
+
+### Memory Markers
+
+![Memory Markers](assets/screenshots/marker_from_memory.png)  
+_Markers loaded from game memory using UE4SS._
 
 ## 🙌 Credits
 
