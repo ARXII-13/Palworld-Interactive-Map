@@ -6,10 +6,12 @@ const SETTINGS_KEY = "palmap-app-settings";
 export interface AppSettings {
     markerSourceMode: MarkerSourceMode;
     ue4ssFolderPath?: string;
+    enableCheats: boolean;
 }
 
 export const defaultSettings: AppSettings = {
     markerSourceMode: "game",
+    enableCheats: false,
 };
 
 export const appSettings = ref<AppSettings>(defaultSettings);

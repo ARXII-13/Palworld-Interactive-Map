@@ -1,6 +1,6 @@
 {
     "name": "pal-data-mining",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Data mining palworld world actors",
     "type": "module",
     "scripts": {

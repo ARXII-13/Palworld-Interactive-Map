@@ -13,3 +13,7 @@ export async function getMapRealtimeData(ue4ssFolder: string): Promise<MapMarker
     });
     return res.data.data;
 }
+
+export async function updateMapRealtimeData(ue4ssFolder: string): Promise<void> {
+    await api.post<GenernicApiResponse<MapMarker[]>>("/map/realtime", { ue4ssFolder });
+}

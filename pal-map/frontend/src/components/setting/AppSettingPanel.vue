@@ -55,6 +55,35 @@
                 </div>
             </div>
         </div>
+
+        <div class="app-setting-item">
+            <label class="app-setting-label" for="refresh-markers">
+                Refresh Memory Markers
+                <span
+                    class="info-icon"
+                    title="Reload all marker data from the game memory to get the latest updates."
+                    >ℹ️</span
+                >
+            </label>
+            <button class="refresh-button" @click="handleRefreshMarkers">Refresh now</button>
+        </div>
+
+        <div class="app-setting-item">
+            <label class="app-setting-label" for="enable-cheat">
+                Enable Cheats
+                <span
+                    class="info-icon"
+                    title="Enable it to use cheat commands. Requires to setup the UE4SS lua scripts before using it. Use at your own RISK!"
+                    >ℹ️</span
+                >
+            </label>
+            <input
+                id="enable-cheat"
+                class="app-setting-checkbox"
+                type="checkbox"
+                v-model="appSettings.enableCheats"
+            />
+        </div>
     </section>
 </template>
 
@@ -66,10 +95,15 @@ import {
     saveAppSettings,
     type AppSettings,
 } from "@/services/settings/appSettings";
+import { updateMapRealtimeData } from "@/services/map";
+import { useToast } from "vue-toastification";
+
+const toast = useToast();
 
 const appSettings = ref<AppSettings>({
     markerSourceMode: "game",
     ue4ssFolderPath: undefined,
+    enableCheats: false,
 });
 
 const showBrowserFallback = ref(false);
@@ -94,11 +128,25 @@ async function selectFolder() {
                 appSettings.value.ue4ssFolderPath = folder;
             }
         } catch (err) {
-            console.error("Failed to pick folder:", err);
+            toast.error("Failed to pick folder.");
+            console.error(err);
         }
     } else {
         showBrowserFallback.value = true;
         appSettings.value.ue4ssFolderPath = "";
+    }
+}
+
+async function handleRefreshMarkers() {
+    if (appSettings.value.ue4ssFolderPath) {
+        try {
+            await updateMapRealtimeData(appSettings.value.ue4ssFolderPath);
+        } catch (err) {
+            toast.error("Failed to update realtime data.");
+            console.error(err);
+        }
+    } else {
+        toast.warning("Please select a UE4SS folder first.");
     }
 }
 </script>

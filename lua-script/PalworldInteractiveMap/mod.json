@@ -1,0 +1,6 @@
+{
+    "Name": "PalworldInteractiveMap",
+    "Description": "LUA script for PalworldInteractiveMap to use cheat mod.",
+    "Version": "1.0",
+    "Scripts": ["Scripts/main.lua"]
+}

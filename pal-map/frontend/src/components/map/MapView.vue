@@ -58,9 +58,12 @@ import {
     loadMapSettings,
     type MapSettings,
 } from "@/services/settings/mapSettings";
+import { teleportToMarker } from "@/services/cheat";
 
 const props = defineProps<{
     markers: MapMarker[];
+    enableCheats: boolean;
+    ue4ssFolderPath?: string;
 }>();
 
 const markerFilters = ref({
@@ -163,6 +166,10 @@ onMounted(async () => {
     updateMarkersCount();
     addCoordinateDisplay();
     updateMarkers();
+
+    if (props.enableCheats) {
+        addCheatControls();
+    }
 });
 
 onUnmounted(() => {
@@ -240,11 +247,17 @@ function updateMarkers() {
         ${
             m.canBeDiscovered
                 ? `<label>
-             <input type="checkbox" id="chk-${m.id}" ${m.discovered ? "checked" : ""} />
+             <input type="checkbox" id="${m.id}" ${m.discovered ? "checked" : ""} />
              <span>Discovered</span>
            </label>`
                 : ""
         }
+        ${
+            props.enableCheats
+                ? `<button class="teleport-button" data-id="${m.id}">Teleport Here</button>`
+                : ""
+        }
+  </div>
   </div>
 `;
 
@@ -256,7 +269,10 @@ function updateMarkers() {
             .bindPopup(popupHtml);
 
         marker.on("popupopen", () => {
-            const checkbox = document.getElementById(`chk-${m.id}`) as HTMLInputElement;
+            const checkbox = document.querySelector(
+                `input[type="checkbox"][data-id="${m.id}"]`
+            ) as HTMLInputElement;
+
             if (checkbox) {
                 checkbox.checked = m.discovered;
                 checkbox.addEventListener("change", () => {
@@ -269,6 +285,18 @@ function updateMarkers() {
                             marker.setIcon(icon);
                         }
                     }
+                });
+            }
+
+            const teleportBtn = document.querySelector(`button[data-id="${m.id}"]`);
+            if (teleportBtn) {
+                teleportBtn.addEventListener("click", () => {
+                    if (!props.ue4ssFolderPath) {
+                        useToast().error("UE4SS folder path is not set in settings.");
+                        return;
+                    }
+                    const { x, y, z } = m.position;
+                    teleportToMarker(props.ue4ssFolderPath, x, y, z);
                 });
             }
         });
@@ -341,6 +369,24 @@ function toggleMarkerProgress(markerType: MapMarkerType, markerId: string) {
             return;
         }
     }
+}
+
+function addCheatControls() {
+    map.on("mousemove", function (e: L.LeafletMouseEvent) {
+        const display = document.querySelector(".coordinate-display");
+        if (display) {
+            const mapCoords = leafletToMap(e.latlng);
+            const worldCoords = mapToWorld(mapCoords.x, mapCoords.y);
+
+            const innerHTML = `
+                    World: ${Math.round(worldCoords.x)}, ${Math.round(worldCoords.y)}<br>
+                    Map: ${Math.round(mapCoords.x)}, ${Math.round(mapCoords.y)}<br>
+                    Leaflet: ${Math.round(e.latlng.lng)}, ${Math.round(e.latlng.lat)}
+                `;
+
+            display.innerHTML = innerHTML;
+        }
+    });
 }
 
 async function onFiltersUpdated(newFilters: typeof markerFilters.value) {

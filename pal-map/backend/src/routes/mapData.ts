@@ -2,6 +2,7 @@ import express from "express";
 import { getMapData } from "../services/mapDataServices.js";
 import { getMapRealtimeData } from "../services/mapRealtimeDataServices.js";
 import logger from "../utils/logger.js";
+import { updateAllActor } from "../services/commandServices.js";
 
 const router = express.Router();
 
@@ -23,6 +24,17 @@ router.get("/realtime", async (req, res) => {
     } catch (err) {
         logger.error(`[Map Realtime API] ${err}`);
         res.status(500).json({ code: 500, error: "Failed to load map realtime data" });
+    }
+});
+
+router.post("/realtime", async (req, res) => {
+    try {
+        const { ue4ssFolder } = req.body;
+        await updateAllActor(ue4ssFolder);
+        res.json({ code: 200 });
+    } catch (err) {
+        logger.error(`[Map Realtime API] ${err}`);
+        res.status(500).json({ code: 500, error: "Failed to update realtime markers" });
     }
 });
 
