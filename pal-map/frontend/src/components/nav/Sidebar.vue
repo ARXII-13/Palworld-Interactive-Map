@@ -22,7 +22,7 @@
             </router-link>
         </nav>
 
-        <div class="sidebar-footer">© 2025 Palworld Interactive Map v1.0.0</div>
+        <div class="sidebar-footer">© 2025 Palworld Interactive Map v1.0.1</div>
     </aside>
 </template>
 

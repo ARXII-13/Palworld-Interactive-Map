@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import mapRouter from "./routes/mapData.js";
 import markerRouter from "./routes/markerData.js";
+import cheatRouter from "./routes/cheat.js";
 import logger from "./utils/logger.js";
 import { frontendPath, indexHtmlPath } from "./path.js";
 
@@ -46,6 +47,7 @@ app.use((req, res, next) => {
 
 app.use("/api/map", mapRouter);
 app.use("/api/marker", markerRouter);
+app.use("/api/cheat", cheatRouter);
 
 // Catch-all route
 app.get("*", (_req: any, res: any) => {

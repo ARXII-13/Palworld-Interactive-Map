@@ -6,7 +6,8 @@
             v-else
             class="flex-1"
             :markers="markers"
-            v-model:markerSourceMode="markerSourceMode"
+            :enableCheats="settings.enableCheats"
+            :ue4ssFolderPath="settings.ue4ssFolderPath"
         />
     </div>
 </template>
@@ -14,7 +15,7 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
 import MapView from "@/components/map/MapView.vue";
-import type { MapMarker, MarkerSourceMode } from "@/types/map";
+import type { MapMarker } from "@/types/map";
 import { getMapData, getMapRealtimeData } from "@/services/map";
 import { getMarkerDiscoveryData } from "@/services/marker";
 import { loadAppSettings, type AppSettings } from "@/services/settings/appSettings";
@@ -24,11 +25,10 @@ const markers = ref<MapMarker[]>([]);
 const loading = ref(true);
 const toast = useToast();
 
-const markerSourceMode = ref<MarkerSourceMode>("game");
-
 const settings = ref<AppSettings>({
     markerSourceMode: "game",
     ue4ssFolderPath: undefined,
+    enableCheats: false,
 });
 
 async function loadMapMarkers() {

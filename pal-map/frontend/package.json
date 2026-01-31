@@ -1,7 +1,7 @@
 {
     "name": "palworld-interactive-map",
     "private": true,
-    "version": "1.0.0",
+    "version": "1.0.1",
     "productName": "Palworld Interactive Map",
     "type": "module",
     "scripts": {

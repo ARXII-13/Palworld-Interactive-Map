@@ -9,10 +9,11 @@
                 <strong>Palworld Interactive Map</strong> is a tool designed to help players track
                 their progress in open-world games. It offers a unique ability to display in-game
                 objects in real-time by reading the game's memory to display the treasure chests and
-                pal eggs near the player tile.
+                pal eggs near the player tile. It also offer some cheat features like teleportation.
+                Just keep in mind that using it as your own risk.
             </p>
 
-            <p><strong>Version:</strong> v1.0.0</p>
+            <p><strong>Version:</strong> v1.0.1</p>
 
             <p><strong>Developer:</strong> ARX II-13</p>
 
