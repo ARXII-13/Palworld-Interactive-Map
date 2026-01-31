@@ -1,6 +1,6 @@
 # 🗺️ Palworld Interactive Map
 
-An interactive **Palworld world map** with marker progress tracking and **Windows desktop support via Electron**.
+An interactive **Palworld world map** with marker progress tracking and **Windows desktop support via Electron**. It has an optional UE4SS mod to enable some cheats.
 
 Users can:
 
@@ -15,6 +15,8 @@ Users can:
     - Desktop app (Electron, Windows)
     - Mobile device via LAN: `http://{your_desktop_private_ip}:8013/`  
       _(when the desktop app is running)_
+- Cheat:
+    - Teleport player to any markers on the map (beta)
 
 ---
 
@@ -40,6 +42,13 @@ pal-map/
 └── data/       # SQLite database (dev / local only)
 ```
 
+### UE4SS Mod
+
+```text
+lua-script/
+└── PalworldInteractiveMap/   # UE4SS mod to execute command send by the application
+```
+
 > 📦 **Electron persistent data location (Windows):**  
 > `C:\Users\{username}\AppData\Roaming\palmap-desktop\`
 
@@ -57,6 +66,7 @@ pal-map/
 - 🖥️ Works in both browser and Electron desktop app
 - 📱 Mobile-friendly via LAN access while desktop app is running
 - 🧠 Safe migration path for future versions
+- 🎮 Teleport player to any map marker in game
 
 > 💡 Personal use case:  
 > I often keep the map open on a mobile device while gaming on my desktop to manage progress without alt-tabbing.
@@ -80,6 +90,10 @@ pal-map/
 ### Desktop
 
 - Electron
+
+### UE4SS Mod
+
+- LUA script
 
 ---
 
@@ -112,7 +126,7 @@ Please refer to `pal-data-mining/README.md`
 
 ---
 
-### Electron Desktop App (Windows)
+### Build Electron Desktop App (Windows)
 
 1. Build the backend:
 
@@ -140,6 +154,29 @@ Please refer to `pal-data-mining/README.md`
     pal-map/dist/win-unpacked/
     ```
 
+### Install UE4SS Mod
+
+1. Please follow the [UE4SS Documentation](https://docs.ue4ss.com/installation-guide.html#method-2---developer-install) for UE4SS installation.
+   I recommend to install the Developer install to fully use all the features such as loading markers from memory.
+   **Download UE4SS** from [UE4SS GitHub](https://github.com/UE4SS-RE/RE-UE4SS).  
+   I used the **zDev version** from [here](https://github.com/UE4SS-RE/RE-UE4SS/releases/tag/v3.0.1).
+2. **Install UE4SS** following their tutorial.  
+   Example path:  
+   `G:\steam\steamapps\common\Palworld\Pal\Binaries\Win64\ue4ss`
+3. Copy the entire folder lua-script\PalworldInteractiveMap to `\Palworld\Pal\Binaries\Win64\ue4ss\Mods`.
+4. Add the mod `PalworldInteractiveMap` in `mods.json
+    ```text
+    {
+        "mod_name": "PalworldInteractiveMap",
+        "mod_enabled": true
+    }
+    ```
+5. Enable the mod `PalworldInteractiveMap` in `mods.txt
+    ```text
+    PalworldInteractiveMap : 1
+    ```
+6. If everything was setup properly, then the mod should launch the next time the game launch. You should see `[Palworld Interactive Map]` from the UE4SS console.
+
 ---
 
 ## Load Markers from Memory
@@ -150,33 +187,12 @@ To make it easier to track these respawning items, this feature reads all active
 
 ### Instructions
 
-1. **Download UE4SS** from [UE4SS GitHub](https://github.com/UE4SS-RE/RE-UE4SS).  
-   I used the **zDev version** from [here](https://github.com/UE4SS-RE/RE-UE4SS/releases/tag/v3.0.1).
-
-2. **Install UE4SS** following their tutorial.  
-   Example path:  
+1. **Open Palworld Interactive Map**, go to **Settings**, switch the **Marker Source** from `Game` to `Memory`, and select the UE4SS folder that you created in [Install UE4SS Mod](#install-ue4ss-mod):  
    `G:\steam\steamapps\common\Palworld\Pal\Binaries\Win64\ue4ss`
 
-3. **Open the game** and load your save. Then open the **UE4SS tool**.
+2. **Switch to the map view**. You should now see in-game markers loaded on the map.
 
-4. **Dump actors to a CSV file** via the UE4SS menu:  
-   `Dumpers -> Dump all actors to file`
-   ![UE4SS_MENU](assets/screenshots/ue4ss_dump_actor.png)
-5. After dumping, you should see a file like:  
-   `xxxxxxxx-ue4ss_actor_data.csv`  
-   located in:  
-   `G:\steam\steamapps\common\Palworld\Pal\Binaries\Win64\ue4ss`
-   ![UE4SS_CSV](assets/screenshots/ue4ss_actor_csv.png)
-6. **Open Palworld Interactive Map**, go to **Settings**, switch the **Marker Source** from `Game` to `Memory`, and select the UE4SS folder you just used:  
-   `G:\steam\steamapps\common\Palworld\Pal\Binaries\Win64\ue4ss`
-
-7. **Switch to the map view**. You should now see in-game markers loaded on the map.
-
-### Limitations
-
-- Memory data is **not updated in real-time**.
-- Users must manually dump actors via the UE4SS tool and refresh the Palworld Interactive Map to update markers.
-- Future improvements may automate this process to reduce manual steps.
+3. To reload the in-game markers, use **Refresh Memory Markers** button from the Settings.
 
 ## Screenshots
 
@@ -194,6 +210,10 @@ Here are some screenshots of Palworld Interactive Map to give you a better idea 
 
 ![Memory Markers](assets/screenshots/marker_from_memory.png)  
 _Markers loaded from game memory using UE4SS._
+
+### Teleport
+
+[![Teleport](https://img.youtube.com/vi/vnGzUyQCW-I/0.jpg)](https://www.youtube.com/watch?v=vnGzUyQCW-I)
 
 ## 🙌 Credits
 

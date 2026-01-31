@@ -5,7 +5,7 @@
     "type": "module",
     "scripts": {
         "prebuild": "eslint . --ext .ts",
-        "build": "tsc && npm run copy-assets && npm run rebuild:electron",
+        "build": "tsc && npm run copy-assets && npm prune --production && npm run rebuild:electron",
         "copy-assets": "npx copyfiles -u 2 src/assets/**/* build/assets",
         "rebuild:electron": "electron-rebuild -f -w better-sqlite3 --version 33.4.11",
         "dev": "npm run rebuild && nodemon --exec node --loader ts-node/esm src/server.ts",

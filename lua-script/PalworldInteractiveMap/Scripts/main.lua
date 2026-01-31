@@ -4,6 +4,9 @@
 local commandFile = "ue4ss\\Mods\\PalworldInteractiveMap\\command.txt"
 local Commands = require("commands")
 
+local scriptStartTime = os.time()
+print(string.format("[Palworld Interactive Map]: Script loaded at %s\n", os.date("%Y-%m-%d %H:%M:%S", scriptStartTime)))
+
 local function splitByNewline(content)
     local lines = {}
     for line in content:gmatch("[^\r\n]+") do
@@ -43,32 +46,45 @@ end
 local function checkForCommands()
 
     local file = io.open(commandFile, "r")
-    if file then
-        local content = file:read("*all")
-        file:close()
-        
-        if content and content ~= "" then
-            print("[Palworld Interactive Map]: Command file found, processing...\n")
-            local commands = parseCommand(content)
-            if not commands then
-                return
-            end
 
-            for _, command in ipairs(commands) do
-                local functionName = command[1]
-                local params = command[2]
+    if not file then
+        return
+    end
+    file:close()
 
-                if Commands[functionName] then
-                    print(string.format("[Palworld Interactive Map]: Executing command: %s\n", functionName))
-                    Commands[functionName](params)
-                else
-                    print(string.format("[Palworld Interactive Map]: Unknown command: %s\n", functionName))
-                end
-            end
+    -- Just to skip some lingering commands created before the game started
+    local currentTime = os.time() - scriptStartTime
+    if currentTime < 30 then
+        print("[Palworld Interactive Map]: Ignoring commands during initial 30 seconds after script load\n")
+        os.remove(commandFile)
+        return
+    end
+
+    file = io.open(commandFile, "r")
+    local content = file:read("*all")
+    file:close()
+
+    if content and content ~= "" then
+        print("[Palworld Interactive Map]: Command file found, processing...\n")
+        local commands = parseCommand(content)
+        if not commands then
+            return
         end
 
-        os.remove(commandFile)
+        for _, command in ipairs(commands) do
+            local functionName = command[1]
+            local params = command[2]
+
+            if Commands[functionName] then
+                print(string.format("[Palworld Interactive Map]: Executing command: %s\n", functionName))
+                Commands[functionName](params)
+            else
+                print(string.format("[Palworld Interactive Map]: Unknown command: %s\n", functionName))
+            end
+        end
     end
+
+    os.remove(commandFile)
 end
 
 LoopAsync(2000, function()

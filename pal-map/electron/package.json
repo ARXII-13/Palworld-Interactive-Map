@@ -21,36 +21,38 @@
     "build": {
         "appId": "com.palmap.desktop",
         "productName": "Palworld Interactive Map",
+        "compression": "maximum",
         "directories": {
             "output": "../dist"
         },
         "files": [
-            "**/*",
-            "./preload.js",
-            "../backend/build/**/*",
-            "../backend/node_modules/**/*",
-            "../frontend/build/**/*",
-            "../frontend/node_modules/**/*"
-        ],
-        "asarUnpack": [
-            "preload.js"
+            "main.js",
+            "preload.js",
+            "package.json",
+            "!**/{.git,.DS_Store,README.md,*.md}"
         ],
         "extraResources": [
             {
                 "from": "../frontend/build",
-                "to": "frontend/build"
-            },
-            {
-                "from": "../frontend/node_modules",
-                "to": "frontend/node_modules"
+                "to": "frontend/build",
+                "filter": [
+                    "**/*"
+                ]
             },
             {
                 "from": "../backend/build",
-                "to": "backend/build"
+                "to": "backend/build",
+                "filter": [
+                    "**/*"
+                ]
             },
             {
                 "from": "../backend/node_modules",
-                "to": "backend/node_modules"
+                "to": "backend/node_modules",
+                "filter": [
+                    "**/*",
+                    "!**/{test,tests,*.md,LICENSE,README.md,CHANGELOG.md}"
+                ]
             }
         ],
         "win": {

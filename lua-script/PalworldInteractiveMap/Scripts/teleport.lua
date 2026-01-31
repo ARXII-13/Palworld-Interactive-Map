@@ -15,7 +15,7 @@ function TeleportUtils.teleportPlayerToLocation(x, y, z)
     local newLoc = {
         X=x,
         Y=y,
-        Z=z + 300 -- Slightly above to avoid ground collision
+        Z=z + 100 -- Slightly above to avoid ground collision
     }
 
     print(string.format("[Palworld Interactive Map]: Current player position: X=%.2f Y=%.2f Z=%.2f\n",
